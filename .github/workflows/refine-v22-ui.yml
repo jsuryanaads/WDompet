@@ -1,0 +1,41 @@
+name: Refine WDompet V2.2 UI
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  refine-ui:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Refine mobile UI and chart empty state
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+          p = Path('v2/index.html')
+          s = p.read_text(encoding='utf-8')
+          css = '''\n<style id="v22-refine-ui">\n/* V2.2 audit refinements */\n@media(max-width:850px){\n  .nav-item small{font-size:10.5px!important;font-weight:800!important}\n  .nav-item.add-nav{width:48px!important;height:48px!important;min-width:48px!important;min-height:48px!important;padding:0!important;border-radius:50%!important;display:grid!important;place-items:center!important}\n  .nav-item.add-nav .nav-icon{width:30px!important;height:30px!important;flex:0 0 30px!important}\n  .nav-item.add-nav .nav-icon svg{width:25px!important;height:25px!important}\n  .nav{padding-left:8px!important;padding-right:8px!important}\n  .balance-top{padding-right:4px}\n  .balance-status,.status{font-size:9px!important}\n  .quick-stats article>span{font-size:9px!important}\n  .quick-stats article .trend{font-size:7.5px!important}\n  .chartpanel{min-height:305px!important}\n  .sectionhead h2{font-size:16px!important}\n  .sectionhead p{font-size:9px!important}\n}\n@media(max-width:520px){\n  .nav-item small{font-size:10px!important}\n  .nav-item.add-nav{width:48px!important;height:48px!important}\n  .nav-item.add-nav .nav-icon{width:30px!important;height:30px!important}\n  .nav-item.add-nav .nav-icon svg{width:25px!important;height:25px!important}\n  .quick-stats article .trend{font-size:7.5px!important}\n}\n</style>\n'''
+          if 'id="v22-refine-ui"' not in s:
+              s = s.replace('</head>', css + '</head>', 1)
+          p.write_text(s, encoding='utf-8')
+          
+          p = Path('v2/app.js')
+          s = p.read_text(encoding='utf-8')
+          old = "function chartHtml(){let months=chartMonths(),values=months.map(m=>{let rows=tx.filter(x=>monthKey(x.date)===m);return{m,inc:rows.filter(x=>x.type==='income').reduce((a,x)=>a+x.amount,0),out:rows.filter(x=>x.type==='expense').reduce((a,x)=>a+x.amount,0)}});let max=Math.max(1,...values.flatMap(x=>[x.inc,x.out]));"
+          new = "function chartHtml(){let months=chartMonths(),values=months.map(m=>{let rows=tx.filter(x=>monthKey(x.date)===m);return{m,inc:rows.filter(x=>x.type==='income').reduce((a,x)=>a+x.amount,0),out:rows.filter(x=>x.type==='expense').reduce((a,x)=>a+x.amount,0)}});if(values.every(x=>x.inc===0&&x.out===0))return '<div class=\"chart-empty\"><b>Belum ada data arus kas</b><span>Tambahkan transaksi untuk melihat grafik 6 bulan.</span></div>';let max=Math.max(1,...values.flatMap(x=>[x.inc,x.out]));"
+          if old in s:
+              s = s.replace(old, new, 1)
+          if '.chart-empty' not in s:
+              s = s.replace("function renderChart(){", "function renderChart(){")
+          p.write_text(s, encoding='utf-8')
+      - name: Commit changes
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add v2/index.html v2/app.js
+          git diff --cached --quiet && exit 0
+          git commit -m "Refine V2.2 mobile UI and empty chart state"
+          git push
