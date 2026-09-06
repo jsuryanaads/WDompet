@@ -2,12 +2,12 @@
 <html lang="id">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>WDompet V2</title><link rel="stylesheet" href="style.css">
+<title>WDompet V2.1</title><link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="top"><div><span>PERSONAL FINANCE</span><h1>WDompet <b>V2</b></h1></div><button id="exportBtn" class="ghost">Export CSV</button></header>
+<header class="top"><div><span>PERSONAL FINANCE</span><h1>WDompet <b>V2.1</b></h1></div><button id="exportBtn" class="ghost">Export CSV</button></header>
 <main>
-<section class="hero"><div><p class="muted">Ringkasan keuangan</p><h2 id="greeting">Keuangan Anda</h2><p class="muted">Kelola pemasukan, pengeluaran, dan anggaran dalam satu tempat.</p></div><div class="period"><label>Periode<select id="monthFilter"></select></label></div></section>
+<section class="hero"><div><p class="muted">Ringkasan keuangan</p><h2 id="greeting">Keuangan Anda</h2><p class="muted">Kelola pemasukan, pengeluaran, anggaran, dan pola pengeluaran dalam satu tempat.</p></div><div class="period"><label>Periode<select id="monthFilter"></select></label></div></section>
 <section class="stats">
 <article><small>Saldo</small><strong id="balance">Rp0</strong><em id="balanceStatus">Saldo berjalan</em></article>
 <article><small>Pemasukan</small><strong id="income">Rp0</strong><em>Periode terpilih</em></article>
@@ -15,12 +15,16 @@
 <article><small>Rasio pengeluaran</small><strong id="ratio">0%</strong><em>Dari pemasukan</em></article>
 </section>
 <section class="layout">
-<div class="panel formpanel"><div class="title"><div><h3>Tambah transaksi</h3><p>Catat transaksi baru.</p></div></div>
+<div class="panel formpanel"><div class="title"><div><h3>Tambah transaksi</h3><p>Catat transaksi baru dengan cepat.</p></div></div>
 <form id="form"><label>Jenis<select id="type"><option value="income">Pemasukan</option><option value="expense">Pengeluaran</option></select></label><label>Tanggal<input id="date" type="date" required></label><label>Kategori<select id="category"><option>Gaji</option><option>Usaha</option><option>Makanan</option><option>Transportasi</option><option>Belanja</option><option>Tagihan</option><option>Kesehatan</option><option>Lainnya</option></select></label><label>Nominal<input id="amount" type="number" min="1" required placeholder="50000"></label><label class="full">Keterangan<input id="note" maxlength="100" placeholder="Contoh: Belanja kebutuhan rumah"></label><button class="primary full">Simpan transaksi</button></form></div>
 <div class="panel chartpanel"><div class="title row"><div><h3>Tren arus kas</h3><p>Pemasukan dan pengeluaran dalam 6 bulan terakhir.</p></div><div class="legend"><span><i class="dot income-dot"></i>Masuk</span><span><i class="dot expense-dot"></i>Keluar</span></div></div><div id="cashChart" class="cash-chart"></div></div>
+</section>
+<section class="layout lower">
+<div class="panel"><div class="title"><div><h3>Pengeluaran per kategori</h3><p>Melihat ke mana uang paling banyak digunakan.</p></div></div><div id="categoryChart" class="category-chart"></div></div>
+<div class="panel insight"><div class="title"><div><h3>Insight keuangan</h3><p>Ringkasan otomatis dari periode terpilih.</p></div></div><div id="insights" class="insights"></div></div>
 </section>
 <section class="panel"><div class="title row"><div><h3>Riwayat transaksi</h3><p id="transactionMeta">0 transaksi</p></div><div class="tools"><input id="search" placeholder="Cari..."><select id="typeFilter"><option value="all">Semua jenis</option><option value="income">Pemasukan</option><option value="expense">Pengeluaran</option></select></div></div>
 <div class="tablewrap"><table><thead><tr><th>Tanggal</th><th>Jenis</th><th>Kategori</th><th>Keterangan</th><th>Nominal</th><th></th></tr></thead><tbody id="list"></tbody></table><div id="empty" class="empty">Belum ada transaksi pada periode ini.</div></div></section>
 <section class="panel budget"><div class="title"><div><h3>Anggaran pengeluaran</h3><p>Target bulanan sederhana.</p></div><div class="budgetinput"><input id="budgetInput" type="number" min="0" placeholder="Anggaran bulanan"><button id="saveBudget" class="secondary">Simpan</button></div></div><div class="progress"><i id="progressBar"></i></div><div class="budgetline"><span id="budgetText">Belum ada anggaran</span><strong id="budgetPercent">0%</strong></div></section>
-</main><footer>WDompet V2 • Frontend • Data tersimpan di browser</footer><script src="app.js"></script>
+</main><footer>WDompet V2.1 • Frontend • Data tersimpan di browser</footer><script src="app.js"></script>
 </body></html>
