@@ -1,0 +1,32 @@
+name: Restore add nav icon only
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  fix-add-icon:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Keep only add icon
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+          p = Path('v2/index.html')
+          s = p.read_text(encoding='utf-8')
+          pattern = r'<button class="nav-item add-nav" data-target="add" aria-label="Tambah transaksi">.*?</button>'
+          replacement = '<button class="nav-item add-nav" data-target="add" aria-label="Tambah transaksi"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span></button>'
+          n = re.sub(pattern, replacement, s, count=1, flags=re.S)
+          if n != s:
+              p.write_text(n, encoding='utf-8')
+      - name: Commit change
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add v2/index.html
+          git diff --cached --quiet && exit 0
+          git commit -m "Keep add navbar as icon only"
+          git push
