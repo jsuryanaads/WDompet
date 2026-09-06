@@ -1,0 +1,32 @@
+name: Hide WDompet V2 navbar icons
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  hide-icons:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove dashboard navbar icons
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+          p = Path('v2/index.html')
+          s = p.read_text(encoding='utf-8')
+          n = re.sub(r'<span class="nav-icon">.*?</span>', '', s, flags=re.S)
+          if n != s:
+              p.write_text(n, encoding='utf-8')
+          else:
+              print('Navbar icons already removed')
+      - name: Commit change
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add v2/index.html
+          git diff --cached --quiet && exit 0
+          git commit -m "Update V2 navbar to text-only"
+          git push
