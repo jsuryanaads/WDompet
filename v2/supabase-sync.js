@@ -48,9 +48,9 @@
       if(remoteEmpty&&(!previousOwner||previousOwner===user.id)&&(localFunds.length||localTx.length||localTransfers.length||Object.keys(budgets).length)){await pushLocal(user)}
       else {const data=remoteToLocal(remote);write(FUNDS,data.funds);write(KEY,data.tx);write(TRANSFERS,data.transfers);Object.keys(localStorage).filter(k=>k.startsWith(BUDGET+'_')).forEach(k=>{internal.add(k);localStorage.removeItem(k);internal.delete(k)});Object.entries(data.budgets).forEach(([m,a])=>{internal.add(BUDGET+'_'+m);localStorage.setItem(BUDGET+'_'+m,String(a));internal.delete(BUDGET+'_'+m)})}
       localStorage.setItem(OWNER,user.id);ready=true;if(typeof initMonths==='function')initMonths();if(typeof render==='function')render();if(typeof renderFunds==='function')renderFunds();
-    }catch(e){console.error('WDompet Supabase initial sync:',e)}finally{running=false}}
-  async function syncChanges(){if(!ready||running||!window.wdompetSupabase)return;running=true;try{const user=await getUser();if(user)await pushLocal(user)}catch(e){console.error('WDompet Supabase save:',e)}finally{running=false}}
-  function schedule(){clearTimeout(timer);timer=setTimeout(syncChanges,500)}
+    }catch(e){console.error('WDompet Supabase initial sync:',e);ready=false}finally{running=false}}
+  async function syncChanges(){if(running||!window.wdompetSupabase)return;running=true;try{const user=await getUser();if(user){await pushLocal(user);localStorage.setItem(OWNER,user.id);ready=true}}catch(e){console.error('WDompet Supabase save:',e)}finally{running=false}}
+  function schedule(){clearTimeout(timer);timer=setTimeout(()=>{if(ready)syncChanges();else initialSync()},500)}
   const original=Storage.prototype.setItem;Storage.prototype.setItem=function(k,v){original.call(this,k,v);if(!internal.has(k)&&(k===KEY||k===FUNDS||k===TRANSFERS||k.startsWith(BUDGET+'_')))schedule()};
   if(window.wdompetAuthReady)window.wdompetAuthReady.then(initialSync);else setTimeout(initialSync,800);
   window.addEventListener('wdompet-auth-ready',initialSync);
