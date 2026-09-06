@@ -1,4 +1,4 @@
-# KeuanganKu V1
+# Wdompet V1
 
 Frontend aplikasi keuangan sederhana.
 
