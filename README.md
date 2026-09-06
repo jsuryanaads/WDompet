@@ -2,7 +2,7 @@
 
 Aplikasi keuangan frontend berbasis HTML, CSS, dan JavaScript.
 
-## V2.4.5
+## V2.4.6
 V2 memakai halaman HTML terpisah yang berbagi `style.css` dan `app.js`.
 
 Halaman:
@@ -23,6 +23,14 @@ Navigasi:
 
 Data V2 disimpan pada localStorage browser dan disinkronkan antar halaman/tab melalui event `storage`.
 
+Perbaikan V2.4.6:
+- Memperbaiki persistensi pilihan Sumber Dana saat edit transaksi.
+- `renderFunds()` sekarang mempertahankan pilihan sumber dana yang sedang aktif.
+- Filter periode mempertahankan pilihan bulan saat daftar bulan diperbarui.
+- Tema Dashboard tetap menjadi sumber tema seluruh halaman.
+- Integrasi transaksi, sumber dana, transfer, anggaran, laporan, dan dashboard tetap berbagi data yang sama.
+- Layout responsive desktop dan mobile dipertahankan.
+
 Fitur:
 - Pemasukan dan pengeluaran
 - Edit dan hapus transaksi
@@ -36,7 +44,7 @@ Fitur:
 - Layout responsive desktop dan mobile
 
 ## Aturan versi
-Setiap perubahan atau perbaikan wajib menaikkan versi. Versi saat ini `V2.4.5`; patch berikutnya menjadi `V2.4.6`.
+Setiap perubahan atau perbaikan wajib menaikkan versi. Versi saat ini `V2.4.6`; patch berikutnya menjadi `V2.4.7`.
 
 ## GitHub Pages
 V2 dapat dibuka dari folder `v2/` pada GitHub Pages.
