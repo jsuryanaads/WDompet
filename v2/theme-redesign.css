@@ -1,0 +1,58 @@
+/* WDompet V2.5.0 - visual redesign based on approved reference */
+:root{--navy:#071d3b;--navy2:#0b2b55;--blue:#2478df;--cyan:#16c1d0;--text:#10264b;--muted:#6d80a2;--line:#e0eaf5;--surface:#fff;--page:#f4f9fe}
+*{box-sizing:border-box}
+body{background:linear-gradient(135deg,#f3f9ff 0%,#fbfdff 52%,#effaf8 100%);color:var(--text)}
+.appbar{background:linear-gradient(180deg,#09264d,#071c38);border:0;box-shadow:none}
+.brand{display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;width:100%}
+.brand-logo{width:112px;height:112px;display:block;filter:drop-shadow(0 14px 24px rgba(23,116,220,.22));margin:0 auto 2px}
+.brand b{font-size:25px;letter-spacing:-.8px;color:#fff}
+.brand span{font-size:11px;line-height:1.45;color:#b9c9de;margin-top:0}
+.nav{background:linear-gradient(180deg,#08254a,#061b36);border-right:0;box-shadow:none}
+.nav-item{color:#a9bad3;font-size:13px;padding:13px 14px;border-radius:13px;min-height:46px}
+.nav-item small{font-size:13px;font-weight:800}
+.nav-item:hover{background:rgba(63,145,234,.12);color:#fff}
+.nav-item.active{background:linear-gradient(90deg,rgba(41,125,224,.45),rgba(41,125,224,.16));color:#fff;box-shadow:inset 3px 0 0 #46b8ff}
+.nav-item.add-nav{width:100%;height:58px;border:1px solid rgba(92,165,237,.3);border-radius:18px;background:rgba(255,255,255,.03);margin:7px 0}
+.nav-item.add-nav .nav-icon{font-size:31px;font-weight:300;color:#fff}
+.nav .theme-button{margin-top:auto!important;border:1px solid rgba(111,182,241,.35)!important;background:rgba(255,255,255,.06)!important;border-radius:18px!important;height:48px!important;color:#fff!important;font-size:12px!important}
+.appbar-actions{display:flex;align-items:center;gap:8px;width:100%}
+.appbar .appbar-actions{margin-top:auto;justify-content:center}
+.appbar .version{display:none}
+.appbar .iconbtn{display:none}
+main{max-width:1220px!important;width:min(1220px,calc(100% - 44px));margin:34px auto!important}
+.welcome{margin-bottom:24px;align-items:end}
+.welcome h1,.page-title h1{font-size:34px;letter-spacing:-1.2px;color:#0d2851}
+.welcome p,.page-title p{font-size:14px;color:#7084a5}
+.eyebrow{font-size:10px;letter-spacing:1.7px;color:#4773a9}
+.monthpick select,.tools input,.tools select,.budgetinput input{border:1px solid #dbe7f3;background:#fff;box-shadow:0 5px 18px rgba(33,76,120,.04);padding:12px 14px;border-radius:13px}
+.balance-card{border-radius:26px;padding:26px;background:linear-gradient(135deg,#188de2 0%,#18b8d0 52%,#42d3ae 100%);box-shadow:0 18px 45px rgba(26,133,205,.22)}
+.balance-card>strong{font-size:40px}
+.quick-stats{gap:14px;margin:0 0 0 0}
+.quick-stats article{border-radius:19px;padding:18px;border:1px solid #e1eaf4;box-shadow:0 10px 28px rgba(26,65,108,.06)}
+.stat-icon{width:40px;height:40px;border-radius:13px;font-size:20px}
+.panel{border-radius:24px;border:1px solid #e0eaf4;box-shadow:0 12px 35px rgba(24,67,112,.055);padding:23px;background:rgba(255,255,255,.97)}
+.sectionhead h2{font-size:20px;color:#102a52}
+.sectionhead p{font-size:12px;color:#7890b0}
+.chartpanel{min-height:330px;padding:25px}
+.cash-chart{min-height:260px;display:flex;align-items:center;justify-content:center}
+.chart-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:220px;color:#7187a9;font-size:14px;gap:7px}
+.chart-empty b{font-size:18px;color:#102b53}
+.category-chart{min-height:110px}
+.insight-item{border-radius:16px;background:#f3f8ff;border-color:#e1ebf7;padding:15px}
+.add-panel form{gap:16px}
+label{font-size:11px;color:#526a8c}
+label input,label select{padding:13px;border-radius:13px;border-color:#dce7f2;background:#fff}
+.primary{border-radius:13px;padding:14px 18px;box-shadow:0 9px 20px rgba(30,139,218,.15)}
+.secondary{border-radius:13px;padding:12px 16px}
+.report-stats{margin:0 0 14px}
+footer{color:#7185a3}
+body.theme-dark{background:linear-gradient(135deg,#071322,#0c1b2f 55%,#0b2025)}
+body.theme-dark .panel,body.theme-dark .quick-stats article{background:#101f33;border-color:#263b56}
+body.theme-dark .welcome h1,body.theme-dark .page-title h1,body.theme-dark .sectionhead h2{color:#eef6ff}
+body.theme-dark .welcome p,body.theme-dark .page-title p,body.theme-dark .sectionhead p{color:#9db1ca}
+body.theme-dark .insight-item{background:#172a43;border-color:#29415f}
+body.theme-dark .monthpick select,body.theme-dark .tools input,body.theme-dark .tools select,body.theme-dark label input,body.theme-dark label select{background:#15263d!important;border-color:#2a405c!important;color:#eef6ff!important}
+body.theme-dark .nav,body.theme-dark .appbar{background:linear-gradient(180deg,#061a35,#040f20)}
+@media(min-width:851px){body{padding-left:220px;padding-bottom:0}.appbar{width:220px;height:100vh;padding:28px 18px}.nav{left:0;width:220px;top:250px;padding:8px 18px 22px}.appbar .theme-button{display:none!important}.nav .theme-button{display:flex!important}.appbar .brand-logo{width:116px;height:116px}.appbar-actions{display:block!important}}
+@media(max-width:850px){body{padding-left:86px}.appbar{width:calc(100% - 86px);height:70px;padding:8px 12px}.brand{flex-direction:row;align-items:center;text-align:left;gap:8px}.brand-logo{width:48px;height:48px;margin:0}.brand b{font-size:17px}.brand span{font-size:9px}.nav{width:86px;padding:12px 8px 14px;top:0}.nav-item{padding:8px 4px;min-height:48px}.nav-item small{font-size:8px;text-align:center}.nav-item.add-nav{height:52px}.nav .theme-button{font-size:8px!important}.nav .theme-button{margin-top:auto!important}.appbar .appbar-actions{display:none!important}main{width:calc(100% - 24px);margin:22px auto!important}.welcome{flex-direction:column;align-items:stretch}.welcome h1,.page-title h1{font-size:26px}.quick-stats{grid-template-columns:1fr}.split{grid-template-columns:1fr}.chartpanel{min-height:280px}.cash-chart{min-height:210px}}
+@media(min-width:561px) and (max-width:850px){.quick-stats{grid-template-columns:repeat(3,1fr)}.split{grid-template-columns:1fr 1fr}}
