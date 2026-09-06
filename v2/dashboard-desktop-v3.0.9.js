@@ -1,0 +1,21 @@
+/* WDompet V3.0.9 - desktop dashboard data widgets */
+(function(){
+  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const money=n=>'Rp'+Math.round(Number(n)||0).toLocaleString('id-ID');
+  const get=()=>window.wdompetGetData?.()||{funds:[],tx:[],transfers:[],budgets:{}};
+  const value=(o,keys)=>{for(const k of keys){if(o&&o[k]!==undefined&&o[k]!==null&&o[k]!=='')return o[k]}return ''};
+  const month=()=>document.getElementById('monthFilter')?.value||new Date().toISOString().slice(0,7);
+  function fundBalances(d){const b={};(Array.isArray(d.funds)?d.funds:[]).forEach(f=>b[f.id]=Number(f.openingBalance)||0);(Array.isArray(d.tx)?d.tx:[]).forEach(t=>{if(t.fundId&&b[t.fundId]!=null)b[t.fundId]+=t.type==='income'?Number(t.amount)||0:-(Number(t.amount)||0)});(Array.isArray(d.transfers)?d.transfers:[]).forEach(t=>{if(b[t.fromFundId]!=null)b[t.fromFundId]-=Number(t.amount)||0;if(b[t.toFundId]!=null)b[t.toFundId]+=Number(t.amount)||0});return b}
+  function render(){
+    const d=get(),funds=Array.isArray(d.funds)?d.funds:[],tx=Array.isArray(d.tx)?d.tx:[],m=month(),data=tx.filter(t=>String(t.date||'').slice(0,7)===m),inc=data.filter(t=>t.type==='income').reduce((s,t)=>s+(Number(t.amount)||0),0),out=data.filter(t=>t.type==='expense').reduce((s,t)=>s+(Number(t.amount)||0),0),budget=Number(d.budgets?.[m]||0),balances=fundBalances(d),activeFunds=funds.filter(f=>f.active!==false),totalSaldo=activeFunds.reduce((s,f)=>s+(balances[f.id]||0),0);
+    const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v};
+    set('desktopIncome',money(inc));set('desktopExpense',money(out));set('desktopBalance',money(inc-out));set('desktopBudget',money(budget));set('desktopFunds',String(activeFunds.length));
+    const fundGrid=document.getElementById('fundGrid');
+    if(fundGrid){if(!activeFunds.length){fundGrid.innerHTML='<div class="desktop-empty">Belum ada sumber dana.</div>'}else{const shown=activeFunds.slice(0,6),max=Math.max(1,...shown.map(f=>Math.abs(balances[f.id]||0)),Math.abs(totalSaldo));fundGrid.innerHTML=shown.map(f=>{const name=value(f,['name','nama','title'])||'Sumber Dana',bal=Number(balances[f.id]||0);return `<article class="fund-card"><div class="fund-top"><div class="fund-icon">${esc(name.slice(0,1).toUpperCase())}</div><div class="fund-name">${esc(name)}</div></div><div class="fund-balance">${money(bal)}</div><div class="fund-bar"><i style="width:${Math.round(Math.min(100,Math.abs(bal)/max*100))}%"></i></div></article>`}).join('')+`<article class="fund-card fund-total"><div class="fund-top"><div class="fund-icon">◎</div><div class="fund-name">Total Saldo</div></div><div class="fund-balance">${money(totalSaldo)}</div><div class="fund-bar"><i style="width:100%"></i></div></article>`}}
+    const recent=document.getElementById('recentTxBody');
+    if(recent){const rows=tx.slice().sort((a,b)=>String(b.date||'').localeCompare(String(a.date||''))||(Number(b.created)||0)-(Number(a.created)||0)).slice(0,5);recent.innerHTML=rows.length?rows.map(t=>{const income=t.type==='income';const amount=Number(t.amount)||0;return `<tr><td>${esc(t.date||'-')}</td><td>${esc(t.note||'-')}</td><td>${esc(t.category||'-')}</td><td>${income?'<span class="amount-in">Pemasukan</span>':'<span class="amount-out">Pengeluaran</span>'}</td><td class="${income?'amount-in':'amount-out'}">${income?'+':'-'} ${money(amount)}</td></tr>`}).join(''):'<tr><td colspan="5" class="desktop-empty">Belum ada transaksi.</td></tr>'}
+    const budgetBox=document.getElementById('budgetRows');
+    if(budgetBox){const pct=budget?Math.round(out/budget*100):0;budgetBox.innerHTML=budget?`<div class="budget-row"><span class="budget-label">${esc(m)}</span><span>${money(budget)}</span><span>${money(out)}</span><span class="progress"><i style="width:${Math.min(100,pct)}%"></i></span><b>${pct}%</b></div>`:'<div class="desktop-empty">Belum ada anggaran untuk periode ini.</div>'}
+  }
+  document.addEventListener('DOMContentLoaded',()=>{render();window.addEventListener('wdompet:updated',render);window.addEventListener('wdompet:synced',render);document.getElementById('monthFilter')?.addEventListener('change',render);setTimeout(render,700)});
+})();
