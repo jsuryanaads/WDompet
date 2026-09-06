@@ -10,11 +10,11 @@ Aplikasi keuangan frontend berbasis HTML, CSS, dan JavaScript.
 - Responsive
 - localStorage
 
-## V2.4.1
+## V2.4.4
 V2 memakai halaman HTML terpisah yang berbagi `style.css` dan `app.js`.
 
 Halaman:
-- `v2/index.html` — Beranda
+- `v2/index.html` — Beranda / Dashboard
 - `v2/transaksi.html` — Transaksi
 - `v2/tambah.html` — Tambah/Edit Transaksi
 - `v2/anggaran.html` — Anggaran
@@ -23,7 +23,7 @@ Halaman:
 
 Data V2 disimpan pada localStorage browser dan disinkronkan antar halaman/tab melalui event `storage`.
 
-Fitur V2.4.1:
+Fitur V2.4.4:
 - Pemasukan dan pengeluaran
 - Edit dan hapus transaksi
 - Sumber dana: Bank, E-Wallet, Tunai, Lainnya
@@ -32,11 +32,14 @@ Fitur V2.4.1:
 - Anggaran per periode
 - Laporan dan grafik arus kas
 - Export CSV
-- Dark/light theme tersimpan di browser
+- Satu tombol Tema pada Dashboard menjadi sumber pengaturan tema untuk seluruh halaman
+- Tema tersimpan di localStorage dan diterapkan otomatis saat halaman lain dibuka
+- Navigasi 6 item sejajar: Beranda, Transaksi, Tambah, Anggaran, Laporan, Sumber Dana
+- Hanya Tambah yang menggunakan ikon plus; item lainnya menggunakan teks
 - Layout responsive untuk desktop dan mobile
 
 ## Aturan versi
-Setiap perubahan atau perbaikan wajib menaikkan versi. Patch berikutnya menjadi `V2.4.2`, lalu `V2.4.3`, dan seterusnya. Perubahan fitur besar dapat dinaikkan ke minor version berikutnya.
+Setiap perubahan atau perbaikan wajib menaikkan versi. Patch berikutnya menjadi `V2.4.5`, lalu `V2.4.6`, dan seterusnya. Perubahan fitur besar dapat dinaikkan ke minor version berikutnya.
 
 ## GitHub Pages
 V2 dapat dibuka dari folder `v2/` pada GitHub Pages.
