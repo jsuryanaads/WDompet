@@ -1,4 +1,4 @@
-/* WDompet V2.5.0 - unified sidebar navigation */
+/* WDompet V3.0.0 - unified sidebar and account controls */
 .nav-item.add-nav{width:100%!important;height:auto!important;min-height:46px!important;margin:0!important;padding:13px 14px!important;border:0!important;border-radius:13px!important;background:none!important;box-shadow:none!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;color:#a9bad3!important;font-size:13px!important;font-weight:800!important;text-decoration:none!important}
 .nav-item.add-nav small{display:block!important;font-size:13px!important;font-weight:800!important;line-height:1.2!important;white-space:nowrap!important;color:inherit!important}
 .nav-item.add-nav:hover{background:rgba(63,145,234,.12)!important;color:#fff!important}
@@ -15,14 +15,18 @@
   .nav-item.add-nav small{display:block!important;font-size:8px!important;line-height:1.2!important;white-space:normal!important;word-break:break-word!important;text-align:center!important}
   .nav-item.add-nav:hover{background:rgba(255,255,255,.08)!important;color:#fff!important}
   .nav-item.add-nav.active{background:rgba(255,255,255,.08)!important;color:#fff!important;box-shadow:none!important}
-  .user-email{max-width:150px;font-size:9px;padding:0 7px}
-  .account-panel{top:8px;right:10px;gap:5px;padding:5px 6px;border-radius:10px;max-width:calc(100vw - 100px)}
-  .account-btn{min-height:30px;padding:0 7px;font-size:9px}
+  .user-email{max-width:100px;min-width:0;font-size:8px;padding:0 7px}
+  .account-panel{top:74px;right:8px;left:auto;gap:5px;padding:5px 6px;border-radius:10px;max-width:calc(100vw - 96px)}
+  .account-btn{min-height:30px;padding:0 7px;font-size:8px}
+  main{padding-top:58px!important}
+}
+@media(min-width:561px) and (max-width:850px){
+  .user-email{max-width:150px;font-size:9px}
+  .account-btn{font-size:9px}
+  .account-panel{max-width:calc(100vw - 110px)}
 }
 @media(max-width:560px){
-  .nav-item.add-nav{min-height:46px!important;padding:9px 2px!important}
-  .nav-item.add-nav small{font-size:7.5px!important}
-  .user-email{max-width:100px;font-size:8px}
-  .account-panel{max-width:calc(100vw - 96px)}
-  .account-btn{font-size:8px;padding:0 6px}
+  .user-email{max-width:82px;font-size:7.5px}
+  .account-panel{top:72px;right:6px;max-width:calc(100vw - 92px)}
+  .account-btn{font-size:7.5px;padding:0 6px}
 }
