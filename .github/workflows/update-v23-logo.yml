@@ -1,0 +1,65 @@
+name: WDompet V2.3 elegant logo
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  update-logo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update WDompet logo and version
+        shell: python
+        run: |
+          from pathlib import Path
+          p = Path('v2/index.html')
+          s = p.read_text(encoding='utf-8')
+          old = '<div class="brandmark">👛</div>'
+          new = '''<div class="brandmark" aria-label="WDompet logo">
+            <svg viewBox="0 0 48 48" role="img" aria-hidden="true">
+              <defs>
+                <linearGradient id="wdWallet" x1="7" y1="5" x2="41" y2="43" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#35d6b0"/>
+                  <stop offset="0.52" stop-color="#25a9e8"/>
+                  <stop offset="1" stop-color="#4778ef"/>
+                </linearGradient>
+              </defs>
+              <rect x="4" y="5" width="40" height="38" rx="12" fill="url(#wdWallet)"/>
+              <path d="M12 16.5c0-2.2 1.8-4 4-4h14.5c2.1 0 3.8 1.7 3.8 3.8v2H19.5c-2.5 0-4.5 2-4.5 4.5v7.4c0 2.5 2 4.5 4.5 4.5h14.8v1.2c0 1.4-1.1 2.5-2.5 2.5H16c-2.2 0-4-1.8-4-4z" fill="#fff" opacity=".97"/>
+              <path d="M19.5 20h17v13h-17c-2.5 0-4.5-2-4.5-4.5v-4c0-2.5 2-4.5 4.5-4.5z" fill="#0b2343" opacity=".95"/>
+              <path d="M32.5 24h4v5h-4a2.5 2.5 0 1 1 0-5z" fill="#35d6b0"/>
+              <circle cx="33.5" cy="26.5" r="1" fill="#fff"/>
+              <path d="M14 18.5h18" stroke="#0b2343" stroke-width="1.8" stroke-linecap="round" opacity=".32"/>
+            </svg>
+          </div>'''
+          if old in s:
+              s = s.replace(old, new, 1)
+          css = '''
+<style id="v23-brand-logo">
+.brandmark{display:grid!important;place-items:center!important;overflow:hidden!important;border-radius:11px!important;padding:0!important;box-shadow:0 7px 18px rgba(25,145,207,.24)!important}
+.brandmark svg{width:100%;height:100%;display:block}
+body.theme-dark .brandmark{box-shadow:0 8px 22px rgba(45,174,224,.28)!important}
+@media(max-width:520px){.brandmark{width:36px!important;height:36px!important;border-radius:10px!important}.brand b{font-size:15px!important}.brand span{font-size:7px!important;line-height:1.2!important}}
+</style>
+'''
+          if 'id="v23-brand-logo"' not in s:
+              s = s.replace('</head>', css + '</head>', 1)
+          s = s.replace('<title>WDompet V2.2</title>', '<title>WDompet V2.3</title>', 1)
+          s = s.replace('<span class="version">V2.2</span>', '<span class="version">V2.3</span>', 1)
+          p.write_text(s, encoding='utf-8')
+      - name: Commit V2.3
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add v2/index.html
+          git diff --cached --quiet && exit 0
+          git commit -m "Release WDompet V2.3 with elegant theme logo"
+          git push
+      - name: Remove temporary workflow
+        shell: bash
+        run: |
+          git rm .github/workflows/update-v23-logo.yml
+          git commit -m "Remove temporary V2.3 logo workflow"
+          git push
