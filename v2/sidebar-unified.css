@@ -3,18 +3,26 @@
 .nav-item.add-nav small{display:block!important;font-size:13px!important;font-weight:800!important;line-height:1.2!important;white-space:nowrap!important;color:inherit!important}
 .nav-item.add-nav:hover{background:rgba(63,145,234,.12)!important;color:#fff!important}
 .nav-item.add-nav.active{background:linear-gradient(90deg,rgba(41,125,224,.45),rgba(41,125,224,.16))!important;color:#fff!important;box-shadow:inset 3px 0 0 #46b8ff!important}
-.user-email{display:inline-flex;align-items:center;max-width:210px;min-height:32px;padding:0 10px;border-radius:9px;background:rgba(41,125,224,.10);font-size:11px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:inherit}
-.danger-btn{border-color:rgba(220,70,70,.35)!important}
-.danger-btn:hover{border-color:rgba(220,70,70,.65)!important}
+.user-email{display:inline-flex;align-items:center;max-width:230px;min-height:32px;padding:0 10px;border-radius:9px;background:rgba(41,125,224,.12);font-size:11px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#eaf4ff}
+.account-panel{position:fixed;top:16px;right:22px;z-index:1000;display:flex;align-items:center;gap:8px;padding:7px 8px;border:1px solid rgba(111,182,241,.28);border-radius:12px;background:rgba(7,29,59,.92);box-shadow:0 10px 28px rgba(0,0,0,.18);backdrop-filter:blur(10px)}
+.account-btn{min-height:32px;padding:0 10px;border:1px solid rgba(111,182,241,.28);border-radius:8px;background:rgba(255,255,255,.06);color:#fff;font:inherit;font-size:10px;font-weight:800;cursor:pointer;white-space:nowrap}
+.account-btn:hover{background:rgba(255,255,255,.14)}
+.account-btn:disabled{opacity:.55;cursor:wait}
+.danger-btn{border-color:rgba(220,70,70,.45)!important}
+.danger-btn:hover{border-color:rgba(220,70,70,.75)!important;background:rgba(220,70,70,.12)!important}
 @media(max-width:850px){
   .nav-item.add-nav{width:100%!important;height:auto!important;min-height:48px!important;margin:0!important;padding:8px 3px!important;border:0!important;border-radius:10px!important;background:none!important;box-shadow:none!important;display:flex!important;align-items:center!important;justify-content:center!important}
   .nav-item.add-nav small{display:block!important;font-size:8px!important;line-height:1.2!important;white-space:normal!important;word-break:break-word!important;text-align:center!important}
   .nav-item.add-nav:hover{background:rgba(255,255,255,.08)!important;color:#fff!important}
   .nav-item.add-nav.active{background:rgba(255,255,255,.08)!important;color:#fff!important;box-shadow:none!important}
-  .user-email{max-width:110px;font-size:9px;padding:0 7px}
+  .user-email{max-width:150px;font-size:9px;padding:0 7px}
+  .account-panel{top:8px;right:10px;gap:5px;padding:5px 6px;border-radius:10px;max-width:calc(100vw - 100px)}
+  .account-btn{min-height:30px;padding:0 7px;font-size:9px}
 }
 @media(max-width:560px){
   .nav-item.add-nav{min-height:46px!important;padding:9px 2px!important}
   .nav-item.add-nav small{font-size:7.5px!important}
-  .user-email{max-width:88px;font-size:8px}
+  .user-email{max-width:100px;font-size:8px}
+  .account-panel{max-width:calc(100vw - 96px)}
+  .account-btn{font-size:8px;padding:0 6px}
 }
