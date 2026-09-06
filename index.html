@@ -17,9 +17,7 @@
         <span>Kelola Keuangan<br>Lebih Mudah</span>
       </div>
     </div>
-
     <p class="sidebar-quote">“Disiplin hari ini,<br>masa depan lebih baik”</p>
-
     <div class="appbar-actions">
       <span class="version">V1</span>
       <button id="exportBtn" class="iconbtn" type="button" aria-label="Export transaksi ke CSV" title="Export CSV">⇩</button>
@@ -40,21 +38,9 @@
     </section>
 
     <section class="cards" aria-label="Ringkasan saldo">
-      <article class="card balance">
-        <span>Saldo</span>
-        <strong id="balance">Rp0</strong>
-        <small>Saldo berjalan</small>
-      </article>
-      <article class="card income">
-        <span>Total Pemasukan</span>
-        <strong id="income">Rp0</strong>
-        <small>Semua pemasukan</small>
-      </article>
-      <article class="card expense">
-        <span>Total Pengeluaran</span>
-        <strong id="expense">Rp0</strong>
-        <small>Semua pengeluaran</small>
-      </article>
+      <article class="card balance"><span>Saldo</span><strong id="balance">Rp0</strong><small>Saldo berjalan</small></article>
+      <article class="card income"><span>Total Pemasukan</span><strong id="income">Rp0</strong><small>Semua pemasukan</small></article>
+      <article class="card expense"><span>Total Pengeluaran</span><strong id="expense">Rp0</strong><small>Semua pengeluaran</small></article>
     </section>
 
     <section class="grid" aria-label="Pencatatan dan ringkasan transaksi">
@@ -66,34 +52,39 @@
           </div>
         </div>
 
-        <form id="transactionForm" novalidate>
+        <form id="transactionForm">
           <input type="hidden" id="editId" name="editId">
 
-          <label for="type">Jenis</label>
-          <select id="type" name="type" required>
-            <option value="income">Pemasukan</option>
-            <option value="expense">Pengeluaran</option>
-          </select>
+          <label for="type">Jenis
+            <select id="type" name="type" required>
+              <option value="income">Pemasukan</option>
+              <option value="expense">Pengeluaran</option>
+            </select>
+          </label>
 
-          <label for="date">Tanggal</label>
-          <input type="date" id="date" name="date" required>
+          <label for="date">Tanggal
+            <input type="date" id="date" name="date" required>
+          </label>
 
-          <label for="category">Kategori</label>
-          <select id="category" name="category" required>
-            <option value="Makanan">Makanan</option>
-            <option value="Transportasi">Transportasi</option>
-            <option value="Belanja">Belanja</option>
-            <option value="Tagihan">Tagihan</option>
-            <option value="Gaji">Gaji</option>
-            <option value="Usaha">Usaha</option>
-            <option value="Lainnya">Lainnya</option>
-          </select>
+          <label for="category">Kategori
+            <select id="category" name="category" required>
+              <option value="Makanan">Makanan</option>
+              <option value="Transportasi">Transportasi</option>
+              <option value="Belanja">Belanja</option>
+              <option value="Tagihan">Tagihan</option>
+              <option value="Gaji">Gaji</option>
+              <option value="Usaha">Usaha</option>
+              <option value="Lainnya">Lainnya</option>
+            </select>
+          </label>
 
-          <label for="note">Keterangan</label>
-          <input type="text" id="note" name="note" placeholder="Contoh: Belanja bulanan" maxlength="80" autocomplete="off">
+          <label for="note">Keterangan
+            <input type="text" id="note" name="note" placeholder="Contoh: Belanja bulanan" maxlength="80" autocomplete="off">
+          </label>
 
-          <label for="amount">Nominal</label>
-          <input type="number" id="amount" name="amount" min="1" step="1" inputmode="numeric" placeholder="50000" required>
+          <label for="amount">Nominal
+            <input type="number" id="amount" name="amount" min="1" step="1" inputmode="numeric" placeholder="50000" required>
+          </label>
 
           <div class="form-actions">
             <button id="saveBtn" class="btn primary" type="submit">+ Simpan Transaksi</button>
