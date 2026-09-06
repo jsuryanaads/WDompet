@@ -1,1 +1,1 @@
-window.WDOMPET_SUPABASE={url:'https://ipclsfyabjgfeqpiqtlo.supabase.co',key:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlwY2xzZnlhYmpnZmVxcGlxdGxvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg3MDI0NDgsImV4cCI6MjEwNDI3ODQ0OH0.jLl92FEaYaNLbyvc09JDcb-hq0cNfrgNI0iwILuyWWw';
+window.WDOMPET_SUPABASE={url:'https://ipclsfyabjgfeqpiqtlo.supabase.co',key:'sb_publishable_TvM7TcAPqVtvKes5dBk8Xg_PTe3bYzs'};
