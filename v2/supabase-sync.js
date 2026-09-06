@@ -26,6 +26,22 @@
     const remote=await loadRemote(user),del=async(table,rows,ids)=>{const keep=new Set(ids.map(String));for(const row of rows){if(row.client_id&&!keep.has(String(row.client_id))){const r=await s.from(table).delete().eq('user_id',user.id).eq('client_id',row.client_id);if(r.error)throw r.error}}};
     await del('transaksi',remote.transaksi,localTx.map(x=>x.id));await del('transfer',remote.transfer,localTransfers.map(x=>x.id));await del('anggaran',remote.anggaran,Object.keys(budgets));await del('sumber_dana',remote.sumber_dana,localFunds.map(x=>x.id));
   }
+  async function resetData(){
+    if(!window.wdompetSupabase)return false;
+    const user=await getUser();if(!user)throw new Error('Sesi login tidak ditemukan.');
+    const ok=window.confirm('RESET SEMUA DATA KEUANGAN?\n\nSemua transaksi, transfer, anggaran, dan sumber dana Anda akan dihapus permanen dari Supabase dan perangkat ini. Akun/login tetap dipertahankan.');
+    if(!ok)return false;
+    const s=window.wdompetSupabase;
+    for(const table of ['transaksi','transfer','anggaran','sumber_dana']){
+      const r=await s.from(table).delete().eq('user_id',user.id);if(r.error)throw r.error;
+    }
+    [KEY,FUNDS,TRANSFERS,OWNER].forEach(k=>{internal.add(k);localStorage.removeItem(k);internal.delete(k)});
+    Object.keys(localStorage).filter(k=>k.startsWith(BUDGET+'_')).forEach(k=>{internal.add(k);localStorage.removeItem(k);internal.delete(k)});
+    ready=false;
+    location.reload();
+    return true;
+  }
+  window.wdompetResetData=resetData;
   async function initialSync(){
     if(running||ready||!window.wdompetSupabase)return;running=true;
     try{const user=await getUser();if(!user)return;const remote=await loadRemote(user),localFunds=read(FUNDS),localTx=read(KEY),localTransfers=read(TRANSFERS),budgets=localBudgets(),remoteEmpty=!remote.sumber_dana.length&&!remote.transaksi.length&&!remote.transfer.length&&!remote.anggaran.length,previousOwner=localStorage.getItem(OWNER);
