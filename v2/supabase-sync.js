@@ -29,10 +29,10 @@
   async function resetData(){
     if(!window.wdompetSupabase)return false;
     const user=await getUser();if(!user)throw new Error('Sesi login tidak ditemukan.');
-    const ok=window.confirm('RESET SEMUA DATA KEUANGAN?\n\nSemua transaksi, transfer, anggaran, dan sumber dana Anda akan dihapus permanen dari Supabase dan perangkat ini. Akun/login tetap dipertahankan.');
+    const ok=window.confirm('RESET SEMUA DATA KEUANGAN?\n\nSemua transaksi, transfer, anggaran, sumber dana, dan kategori milik akun ini akan dihapus permanen. Akun/login tetap dipertahankan.');
     if(!ok)return false;
     const s=window.wdompetSupabase;
-    for(const table of ['transaksi','transfer','anggaran','sumber_dana']){
+    for(const table of ['transaksi','transfer','anggaran','sumber_dana','kategori']){
       const r=await s.from(table).delete().eq('user_id',user.id);if(r.error)throw r.error;
     }
     [KEY,FUNDS,TRANSFERS,OWNER].forEach(k=>{internal.add(k);localStorage.removeItem(k);internal.delete(k)});
