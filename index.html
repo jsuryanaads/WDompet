@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KeuanganKu V1</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <span class="eyebrow">PERSONAL FINANCE</span>
+      <h1>KeuanganKu</h1>
+    </div>
+    <button id="exportBtn" class="btn secondary">Export CSV</button>
+  </header>
+
+  <main class="container">
+    <section class="cards">
+      <article class="card balance">
+        <span>Saldo</span>
+        <strong id="balance">Rp0</strong>
+        <small>Saldo berjalan</small>
+      </article>
+      <article class="card income">
+        <span>Total Pemasukan</span>
+        <strong id="income">Rp0</strong>
+        <small>Semua pemasukan</small>
+      </article>
+      <article class="card expense">
+        <span>Total Pengeluaran</span>
+        <strong id="expense">Rp0</strong>
+        <small>Semua pengeluaran</small>
+      </article>
+    </section>
+
+    <section class="grid">
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Tambah Transaksi</h2>
+            <p>Catat pemasukan atau pengeluaran.</p>
+          </div>
+        </div>
+
+        <form id="transactionForm">
+          <label>Jenis
+            <select id="type" required>
+              <option value="income">Pemasukan</option>
+              <option value="expense">Pengeluaran</option>
+            </select>
+          </label>
+
+          <label>Tanggal
+            <input type="date" id="date" required>
+          </label>
+
+          <label>Kategori
+            <select id="category" required>
+              <option>Makanan</option>
+              <option>Transportasi</option>
+              <option>Belanja</option>
+              <option>Tagihan</option>
+              <option>Gaji</option>
+              <option>Usaha</option>
+              <option>Lainnya</option>
+            </select>
+          </label>
+
+          <label>Keterangan
+            <input type="text" id="note" placeholder="Contoh: Belanja bulanan" maxlength="80">
+          </label>
+
+          <label>Nominal
+            <input type="number" id="amount" min="1" step="1" placeholder="50000" required>
+          </label>
+
+          <button class="btn primary" type="submit">+ Simpan Transaksi</button>
+        </form>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Ringkasan</h2>
+            <p>Ikhtisar transaksi yang tersimpan.</p>
+          </div>
+        </div>
+        <div class="summary">
+          <div><span>Jumlah transaksi</span><strong id="count">0</strong></div>
+          <div><span>Transaksi pemasukan</span><strong id="incomeCount">0</strong></div>
+          <div><span>Transaksi pengeluaran</span><strong id="expenseCount">0</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head transactions-head">
+        <div>
+          <h2>Riwayat Transaksi</h2>
+          <p>Data tersimpan otomatis di browser perangkat ini.</p>
+        </div>
+        <input id="search" class="search" type="search" placeholder="Cari transaksi...">
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Tanggal</th><th>Jenis</th><th>Kategori</th>
+              <th>Keterangan</th><th>Nominal</th><th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="transactionList"></tbody>
+        </table>
+        <div id="empty" class="empty">Belum ada transaksi.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>KeuanganKu V1 • Frontend only</footer>
+  <script src="app.js"></script>
+</body>
+</html>
