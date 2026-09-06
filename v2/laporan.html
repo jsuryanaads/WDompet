@@ -1,12 +1,7 @@
 <!doctype html>
 <html lang="id">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0b2343">
-<title>WDompet V2.3 — Laporan</title>
-<meta http-equiv="refresh" content="0;url=index.html#reports">
-<script>location.replace('index.html#reports');</script>
-</head>
-<body><p>Membuka halaman Laporan WDompet V2.3…</p></body>
-</html>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b2343"><title>WDompet V2.4.1 — Laporan</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<header class="appbar"><div class="brand"><div class="brandmark" aria-label="WDompet logo">W</div><div><b>WDompet</b><span>Kelola Keuangan<br>Lebih Mudah</span></div></div><div class="appbar-actions"><span class="version">V2.4.1</span><button id="themeToggle" class="top-icon" type="button">☼</button><button id="reportExport" class="iconbtn" type="button" aria-label="Export CSV">⇩</button></div></header>
+<nav class="nav" aria-label="Navigasi utama"><a class="nav-item" href="index.html"><span class="nav-icon">⌂</span><small>Beranda</small></a><a class="nav-item" href="transaksi.html"><span class="nav-icon">☷</span><small>Transaksi</small></a><a class="nav-item add-nav" href="tambah.html"><span class="nav-icon">＋</span><small>Tambah</small></a><a class="nav-item" href="anggaran.html"><span class="nav-icon">◫</span><small>Anggaran</small></a><a class="nav-item active" href="laporan.html"><span class="nav-icon">▥</span><small>Laporan</small></a><a class="nav-item" href="sumber-dana.html"><span class="nav-icon">◉</span><small>Sumber Dana</small></a></nav>
+<main class="container" style="max-width:1160px;margin:22px auto 90px;padding:0 18px"><section class="page-title"><span class="eyebrow">LAPORAN</span><h1>Laporan Keuangan</h1><p>Ringkasan pemasukan, pengeluaran dan kategori pada periode terpilih.</p></section><section class="panel"><div class="tools"><label>Periode<select id="monthFilter" aria-label="Periode"></select></label></div><div class="cards" style="margin-top:16px"><article class="card"><span>Saldo Periode</span><b id="reportBalance">Rp0</b></article><article class="card"><span>Pemasukan</span><b id="reportIncome">Rp0</b></article><article class="card"><span>Pengeluaran</span><b id="reportExpense">Rp0</b></article></div></section><section class="panel" style="margin-top:16px"><div class="sectionhead"><div><h2>Arus Kas</h2><p>Tren enam bulan.</p></div></div><div id="reportCashChart" class="chart"></div></section><section class="panel" style="margin-top:16px"><div class="sectionhead"><div><h2>Pengeluaran per Kategori</h2></div></div><div id="reportCategoryChart"></div></section></main><script src="app.js"></script></body></html>
