@@ -2,15 +2,7 @@
 
 Aplikasi keuangan frontend berbasis HTML, CSS, dan JavaScript.
 
-## V1
-- Saldo, pemasukan, pengeluaran
-- Tambah dan hapus transaksi
-- Pencarian
-- Export CSV
-- Responsive
-- localStorage
-
-## V2.4.4
+## V2.4.5
 V2 memakai halaman HTML terpisah yang berbagi `style.css` dan `app.js`.
 
 Halaman:
@@ -21,9 +13,17 @@ Halaman:
 - `v2/laporan.html` — Laporan
 - `v2/sumber-dana.html` — Sumber Dana & Transfer
 
+Semua halaman menggunakan tema visual yang sama. Dashboard menjadi pusat pengaturan tema; pilihan light/dark disimpan pada `localStorage` sehingga halaman lain mengikuti tema yang sama.
+
+Navigasi:
+- Desktop menggunakan sidebar vertikal.
+- Mobile menggunakan navbar horizontal di bagian bawah dengan urutan yang sama seperti desktop.
+- Beranda, Transaksi, Anggaran, Laporan, dan Sumber Dana hanya menggunakan teks.
+- Tambah hanya menggunakan tombol `＋` tanpa teks.
+
 Data V2 disimpan pada localStorage browser dan disinkronkan antar halaman/tab melalui event `storage`.
 
-Fitur V2.4.4:
+Fitur:
 - Pemasukan dan pengeluaran
 - Edit dan hapus transaksi
 - Sumber dana: Bank, E-Wallet, Tunai, Lainnya
@@ -32,14 +32,11 @@ Fitur V2.4.4:
 - Anggaran per periode
 - Laporan dan grafik arus kas
 - Export CSV
-- Satu tombol Tema pada Dashboard menjadi sumber pengaturan tema untuk seluruh halaman
-- Tema tersimpan di localStorage dan diterapkan otomatis saat halaman lain dibuka
-- Navigasi 6 item sejajar: Beranda, Transaksi, Tambah, Anggaran, Laporan, Sumber Dana
-- Hanya Tambah yang menggunakan ikon plus; item lainnya menggunakan teks
-- Layout responsive untuk desktop dan mobile
+- Dark/light theme terpusat dari Dashboard
+- Layout responsive desktop dan mobile
 
 ## Aturan versi
-Setiap perubahan atau perbaikan wajib menaikkan versi. Patch berikutnya menjadi `V2.4.5`, lalu `V2.4.6`, dan seterusnya. Perubahan fitur besar dapat dinaikkan ke minor version berikutnya.
+Setiap perubahan atau perbaikan wajib menaikkan versi. Versi saat ini `V2.4.5`; patch berikutnya menjadi `V2.4.6`.
 
 ## GitHub Pages
 V2 dapat dibuka dari folder `v2/` pada GitHub Pages.
