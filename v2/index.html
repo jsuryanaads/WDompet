@@ -1,22 +1,60 @@
 <!doctype html>
 <html lang="id">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0f172a"><title>WDompet V2</title><link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<title>WDompet V2.2</title>
+<link rel="stylesheet" href="style.css">
 </head>
-<body id="top">
-<header class="appbar"><div class="brand"><div class="brandmark">W</div><div><b>WDompet</b><span>Keuangan pribadi</span></div></div><button id="exportBtn" class="iconbtn" aria-label="Export CSV">⇩</button></header>
+<body>
+<header class="appbar">
+  <div class="brand"><div class="brandmark">W</div><div><b>WDompet</b><span>Keuangan pribadi</span></div></div>
+  <div class="appbar-actions"><span class="version">V2.2</span><button id="exportBtn" class="iconbtn" aria-label="Export CSV">⇩</button></div>
+</header>
+
 <main>
-<section class="welcome"><div><span class="eyebrow">DASHBOARD</span><h1>Keuangan Anda</h1><p>Pantau uang masuk, keluar, dan target dengan mudah.</p></div><label class="monthpick">Periode<select id="monthFilter"></select></label></section>
-<section class="balance-card"><div class="balance-top"><span>Saldo periode</span><span id="balanceStatus" class="status">● Positif</span></div><strong id="balance">Rp0</strong><div class="balance-foot"><span>Pemasukan <b id="income">Rp0</b></span><span>Pengeluaran <b id="expense">Rp0</b></span></div></section>
-<section class="quick-stats"><article><div class="stat-icon in">↗</div><span>Pemasukan</span><b id="incomeMini">Rp0</b></article><article><div class="stat-icon out">↘</div><span>Pengeluaran</span><b id="expenseMini">Rp0</b></article><article><div class="stat-icon ratio">%</div><span>Rasio keluar</span><b id="ratioMini">0%</b></article></section>
-<section class="panel chartpanel"><div class="sectionhead"><div><span class="eyebrow">ANALISIS</span><h2>Tren arus kas</h2><p>Pergerakan 6 bulan terakhir</p></div><div class="legend"><span><i class="dot in"></i>Masuk</span><span><i class="dot out"></i>Keluar</span></div></div><div id="cashChart" class="cash-chart"></div></section>
-<section class="split"><section class="panel"><div class="sectionhead"><div><span class="eyebrow">PENGELUARAN</span><h2>Per kategori</h2></div></div><div id="categoryChart" class="category-chart"></div></section><section class="panel"><div class="sectionhead"><div><span class="eyebrow">INSIGHT</span><h2>Ringkasan</h2></div></div><div id="insights" class="insights"></div></section></section>
-<section id="transaksi" class="panel transaction-panel"><div class="sectionhead row"><div><span class="eyebrow">AKTIVITAS</span><h2>Transaksi</h2><p id="transactionMeta">0 transaksi</p></div><div class="tools"><input id="search" placeholder="Cari transaksi..."><select id="typeFilter"><option value="all">Semua</option><option value="income">Masuk</option><option value="expense">Keluar</option></select></div></div><div class="tablewrap"><table><thead><tr><th>Tanggal</th><th>Jenis</th><th>Kategori</th><th>Keterangan</th><th>Nominal</th><th></th></tr></thead><tbody id="list"></tbody></table><div id="empty" class="empty">Belum ada transaksi pada periode ini.</div></div></section>
-<section id="tambah" class="panel add-panel"><div class="sectionhead"><span class="eyebrow">CATAT UANG</span><h2>Tambah transaksi</h2><p>Masukkan transaksi baru ke WDompet.</p></div><form id="form"><label>Jenis<select id="type"><option value="income">Pemasukan</option><option value="expense">Pengeluaran</option></select></label><label>Tanggal<input id="date" type="date" required></label><label>Kategori<select id="category"><option>Gaji</option><option>Usaha</option><option>Makanan</option><option>Transportasi</option><option>Belanja</option><option>Tagihan</option><option>Kesehatan</option><option>Lainnya</option></select></label><label>Nominal<input id="amount" type="number" min="1" required placeholder="50000"></label><label class="full">Keterangan<input id="note" maxlength="100" placeholder="Contoh: Belanja kebutuhan rumah"></label><button class="primary full">+ Simpan transaksi</button></form></section>
-<section id="anggaran" class="panel budget"><div class="sectionhead"><span class="eyebrow">TARGET</span><h2>Anggaran bulanan</h2><p>Kontrol pengeluaran agar tetap sesuai target.</p></div><div class="budgetinput"><input id="budgetInput" type="number" min="0" placeholder="Masukkan anggaran"><button id="saveBudget" class="secondary">Simpan</button></div><div class="progress"><i id="progressBar"></i></div><div class="budgetline"><span id="budgetText">Belum ada anggaran</span><strong id="budgetPercent">0%</strong></div></section>
+  <section class="view active" data-view="home" id="home">
+    <section class="welcome"><div><span class="eyebrow">BERANDA</span><h1>Keuangan Anda</h1><p>Pantau uang masuk, keluar, dan target dengan mudah.</p></div><label class="monthpick">Periode<select id="monthFilter"></select></label></section>
+    <section class="balance-card"><div class="balance-top"><span>Saldo periode</span><span id="balanceStatus" class="status">● Positif</span></div><strong id="balance">Rp0</strong><div class="balance-foot"><span>Pemasukan <b id="income">Rp0</b></span><span>Pengeluaran <b id="expense">Rp0</b></span></div></section>
+    <section class="quick-stats"><article><div class="stat-icon in">↗</div><span>Pemasukan</span><b id="incomeMini">Rp0</b></article><article><div class="stat-icon out">↘</div><span>Pengeluaran</span><b id="expenseMini">Rp0</b></article><article><div class="stat-icon ratio">%</div><span>Rasio keluar</span><b id="ratioMini">0%</b></article></section>
+    <section class="panel chartpanel"><div class="sectionhead"><div><span class="eyebrow">ANALISIS</span><h2>Tren arus kas</h2><p>Pergerakan 6 bulan terakhir</p></div><div class="legend"><span><i class="dot in"></i>Masuk</span><span><i class="dot out"></i>Keluar</span></div></div><div id="cashChart" class="cash-chart"></div></section>
+    <section class="split"><section class="panel"><div class="sectionhead"><div><span class="eyebrow">PENGELUARAN</span><h2>Per kategori</h2></div></div><div id="categoryChart" class="category-chart"></div></section><section class="panel"><div class="sectionhead"><div><span class="eyebrow">INSIGHT</span><h2>Ringkasan</h2></div></div><div id="insights" class="insights"></div></section></section>
+  </section>
+
+  <section class="view" data-view="transactions" id="transactions">
+    <section class="page-title"><span class="eyebrow">DATA KEUANGAN</span><h1>Transaksi</h1><p>Kelola seluruh pemasukan dan pengeluaran Anda.</p></section>
+    <section class="panel transaction-panel"><div class="sectionhead row"><div><h2>Riwayat transaksi</h2><p id="transactionMeta">0 transaksi</p></div><div class="tools"><input id="search" placeholder="Cari transaksi..." aria-label="Cari transaksi"><select id="typeFilter" aria-label="Filter jenis"><option value="all">Semua</option><option value="income">Masuk</option><option value="expense">Keluar</option></select></div></div><div class="tablewrap"><table><thead><tr><th>Tanggal</th><th>Jenis</th><th>Kategori</th><th>Keterangan</th><th>Nominal</th><th></th></tr></thead><tbody id="list"></tbody></table><div id="empty" class="empty">Belum ada transaksi pada periode ini.</div></div></section>
+  </section>
+
+  <section class="view" data-view="add" id="add">
+    <section class="page-title"><span class="eyebrow">CATAT UANG</span><h1>Tambah transaksi</h1><p>Masukkan transaksi baru ke WDompet.</p></section>
+    <section class="panel add-panel"><form id="form"><label>Jenis<select id="type"><option value="income">Pemasukan</option><option value="expense">Pengeluaran</option></select></label><label>Tanggal<input id="date" type="date" required></label><label>Kategori<select id="category"><option>Gaji</option><option>Usaha</option><option>Makanan</option><option>Transportasi</option><option>Belanja</option><option>Tagihan</option><option>Kesehatan</option><option>Lainnya</option></select></label><label>Nominal<input id="amount" type="number" min="1" required placeholder="50000"></label><label class="full">Keterangan<input id="note" maxlength="100" placeholder="Contoh: Belanja kebutuhan rumah"></label><button class="primary full">+ Simpan transaksi</button></form></section>
+  </section>
+
+  <section class="view" data-view="budget" id="budget">
+    <section class="page-title"><span class="eyebrow">TARGET</span><h1>Anggaran</h1><p>Kontrol pengeluaran agar tetap sesuai target.</p></section>
+    <section class="panel budget"><div class="sectionhead"><div><h2>Anggaran bulanan</h2><p>Anggaran berlaku untuk periode yang dipilih.</p></div></div><div class="budgetinput"><input id="budgetInput" type="number" min="0" placeholder="Masukkan anggaran"><button id="saveBudget" class="secondary">Simpan</button></div><div class="progress"><i id="progressBar"></i></div><div class="budgetline"><span id="budgetText">Belum ada anggaran</span><strong id="budgetPercent">0%</strong></div></section>
+    <section class="panel budget-info"><div class="sectionhead"><div><span class="eyebrow">CATATAN</span><h2>Kontrol pengeluaran</h2></div></div><div id="budgetInsight" class="insights"></div></section>
+  </section>
+
+  <section class="view" data-view="reports" id="reports">
+    <section class="page-title"><span class="eyebrow">LAPORAN</span><h1>Laporan keuangan</h1><p>Ringkasan periode dan kategori pengeluaran.</p></section>
+    <section class="quick-stats report-stats"><article><span>Saldo</span><b id="reportBalance">Rp0</b></article><article><span>Total masuk</span><b id="reportIncome">Rp0</b></article><article><span>Total keluar</span><b id="reportExpense">Rp0</b></article></section>
+    <section class="panel chartpanel"><div class="sectionhead"><div><span class="eyebrow">TREN</span><h2>Arus kas 6 bulan</h2></div></div><div id="reportCashChart" class="cash-chart"></div></section>
+    <section class="panel report-category"><div class="sectionhead"><div><span class="eyebrow">ANALISIS</span><h2>Pengeluaran per kategori</h2></div></div><div id="reportCategoryChart" class="category-chart"></div></section>
+    <button id="reportExport" class="secondary report-export">⇩ Export semua transaksi CSV</button>
+  </section>
 </main>
-<nav class="bottomnav"><a href="#top" class="active"><span>⌂</span>Beranda</a><a href="#transaksi"><span>≋</span>Transaksi</a><a href="#tambah" class="fab"><span>＋</span></a><a href="#anggaran"><span>◴</span>Anggaran</a><button id="exportBottom"><span>⇩</span>Export</button></nav>
-<footer>WDompet V2 • Frontend • Data tersimpan di browser</footer>
+
+<nav class="nav" aria-label="Navigasi utama">
+  <button class="nav-item active" data-target="home"><span>⌂</span><small>Beranda</small></button>
+  <button class="nav-item" data-target="transactions"><span>≋</span><small>Transaksi</small></button>
+  <button class="nav-item add-nav" data-target="add" aria-label="Tambah transaksi"><span>＋</span><small>Tambah</small></button>
+  <button class="nav-item" data-target="budget"><span>◴</span><small>Anggaran</small></button>
+  <button class="nav-item" data-target="reports"><span>▥</span><small>Laporan</small></button>
+</nav>
+<footer>WDompet V2.2 • Frontend • Data tersimpan di browser</footer>
 <script src="app.js"></script>
-</body></html>
+</body>
+</html>
