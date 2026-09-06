@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  // WDompet V3.0.5 — detector + two presentation modes.
+  // WDompet V3.0.6 — detector + two presentation modes.
   function detectMode(){
     var width = Number(window.innerWidth) || 0;
     var hasFinePointer = false;
@@ -28,51 +28,51 @@
   }
 
   function installPresentationCSS(){
-    if (document.getElementById('wdompet-presentation-v305')) return;
+    if (document.getElementById('wdompet-presentation-v306')) return;
     var style = document.createElement('style');
-    style.id = 'wdompet-presentation-v305';
+    style.id = 'wdompet-presentation-v306';
     style.textContent = '\
-html.ui-desktop body{padding-left:220px;padding-bottom:0}\
-html.ui-desktop .appbar{position:fixed;left:0;top:0;width:220px;height:100vh;padding:28px 18px;display:flex;flex-direction:column;align-items:stretch;gap:24px}\
-html.ui-desktop .appbar .brand{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:8px;text-align:center;width:100%}\
-html.ui-desktop .appbar .brand-logo{width:108px;height:108px;margin:0 auto}\
-html.ui-desktop .appbar .brand b{font-size:24px}\
-html.ui-desktop .appbar .brand span{font-size:10px;line-height:1.4}\
-html.ui-desktop .nav{position:fixed;left:0;top:245px;bottom:0;width:220px;padding:10px 18px 22px;display:flex;flex-direction:column}\
-html.ui-desktop main{width:min(1220px,calc(100% - 44px));margin:34px auto}\
-html.ui-desktop .appbar-actions{margin-top:auto;justify-content:center}\
-html.ui-mobile body{padding-left:86px;padding-bottom:24px}\
-html.ui-mobile .appbar{position:sticky;left:auto;top:0;width:calc(100% - 86px);height:70px;padding:8px 12px}\
-html.ui-mobile .appbar .brand{display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:8px;text-align:left;width:auto;min-width:0}\
-html.ui-mobile .appbar .brand-logo{width:48px;height:48px;margin:0}\
-html.ui-mobile .appbar .brand b{font-size:17px}\
-html.ui-mobile .appbar .brand span{font-size:9px}\
-html.ui-mobile .nav{position:fixed;left:0;top:0;bottom:0;width:86px;height:100vh;padding:76px 8px 14px;display:flex;flex-direction:column;gap:6px;overflow-y:auto}\
-html.ui-mobile .nav-item{width:100%;min-height:48px;padding:8px 4px;justify-content:center;text-align:center}\
-html.ui-mobile .nav-item small{font-size:8px;line-height:1.2;white-space:normal;word-break:break-word;text-align:center}\
-html.ui-mobile main{width:calc(100% - 24px);margin:22px auto;padding-top:0!important}\
-html.ui-mobile .welcome{flex-direction:column;align-items:stretch}\
-html.ui-mobile .quick-stats{grid-template-columns:1fr}\
-html.ui-mobile .split{grid-template-columns:1fr}\
-html.ui-mobile .tools{flex-direction:column}\
-html.ui-mobile .tools input{width:100%}\
-html.ui-mobile .tablewrap table{min-width:720px}\
-html.ui-mobile .appbar .appbar-actions{display:none}\
-html.ui-mobile footer{padding-bottom:20px}\
-html.ui-mobile .account-panel{top:74px;right:8px;left:auto;max-width:calc(100vw - 96px)}\
-html.ui-mobile .user-email{max-width:100px;font-size:8px}\
-html.ui-mobile .account-btn{min-height:30px;padding:0 7px;font-size:8px}\
-@media(min-width:561px) and (max-width:850px){html.ui-mobile .quick-stats{grid-template-columns:repeat(3,1fr)}html.ui-mobile .split{grid-template-columns:1fr 1fr}}\
-@media(max-width:560px){html.ui-mobile body{padding-left:78px}html.ui-mobile .appbar{width:calc(100% - 78px);padding:8px}.ui-mobile .nav{width:78px;padding-left:5px;padding-right:5px}.ui-mobile .nav-item{min-height:46px;padding:8px 3px}.ui-mobile .nav-item small{font-size:7.5px}.ui-mobile .appbar .brand-logo{width:42px;height:42px}.ui-mobile .appbar .brand b{font-size:15px}.ui-mobile .account-panel{top:72px;right:6px;max-width:calc(100vw - 84px)}.ui-mobile .user-email{max-width:82px;font-size:7.5px}.ui-mobile .account-btn{font-size:7.5px;padding:0 6px}}';
+html.ui-desktop body{padding-left:220px!important;padding-bottom:0!important}\
+html.ui-desktop .appbar{position:fixed!important;left:0!important;top:0!important;width:220px!important;height:100vh!important;padding:28px 18px!important;display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:24px!important}\
+html.ui-desktop .appbar .brand{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;text-align:center!important;width:100%!important}\
+html.ui-desktop .appbar .brand-logo{width:108px!important;height:108px!important;margin:0 auto!important}\
+html.ui-desktop .appbar .brand b{font-size:24px!important}\
+html.ui-desktop .appbar .brand span{font-size:10px!important;line-height:1.4!important}\
+html.ui-desktop .nav{position:fixed!important;left:0!important;top:245px!important;bottom:0!important;width:220px!important;padding:10px 18px 22px!important;display:flex!important;flex-direction:column!important}\
+html.ui-desktop main{width:min(1220px,calc(100% - 44px))!important;margin:34px auto!important}\
+html.ui-desktop .appbar-actions{margin-top:auto!important;justify-content:center!important}\
+html.ui-mobile body{padding-left:86px!important;padding-bottom:24px!important}\
+html.ui-mobile .appbar{position:sticky!important;left:auto!important;top:0!important;width:calc(100% - 86px)!important;height:70px!important;padding:8px 12px!important}\
+html.ui-mobile .appbar .brand{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;text-align:left!important;width:auto!important;min-width:0!important}\
+html.ui-mobile .appbar .brand-logo{width:48px!important;height:48px!important;margin:0!important}\
+html.ui-mobile .appbar .brand b{font-size:17px!important}\
+html.ui-mobile .appbar .brand span{font-size:9px!important}\
+html.ui-mobile .nav{position:fixed!important;left:0!important;top:0!important;bottom:0!important;width:86px!important;height:100vh!important;padding:76px 8px 14px!important;display:flex!important;flex-direction:column!important;gap:6px!important;overflow-y:auto!important}\
+html.ui-mobile .nav-item{width:100%!important;min-height:48px!important;padding:8px 4px!important;justify-content:center!important;text-align:center!important}\
+html.ui-mobile .nav-item small{font-size:8px!important;line-height:1.2!important;white-space:normal!important;word-break:break-word!important;text-align:center!important}\
+html.ui-mobile main{width:calc(100% - 24px)!important;margin:22px auto!important;padding-top:0!important}\
+html.ui-mobile .welcome{flex-direction:column!important;align-items:stretch!important}\
+html.ui-mobile .quick-stats{grid-template-columns:1fr!important}\
+html.ui-mobile .split{grid-template-columns:1fr!important}\
+html.ui-mobile .tools{flex-direction:column!important}\
+html.ui-mobile .tools input{width:100%!important}\
+html.ui-mobile .tablewrap table{min-width:720px!important}\
+html.ui-mobile .appbar .appbar-actions{display:none!important}\
+html.ui-mobile footer{padding-bottom:20px!important}\
+html.ui-mobile .account-panel{top:74px!important;right:8px!important;left:auto!important;max-width:calc(100vw - 96px)!important}\
+html.ui-mobile .user-email{max-width:100px!important;font-size:8px!important}\
+html.ui-mobile .account-btn{min-height:30px!important;padding:0 7px!important;font-size:8px!important}\
+@media(min-width:561px) and (max-width:850px){html.ui-mobile .quick-stats{grid-template-columns:repeat(3,1fr)!important}html.ui-mobile .split{grid-template-columns:1fr 1fr!important}}\
+@media(max-width:560px){html.ui-mobile body{padding-left:78px!important}html.ui-mobile .appbar{width:calc(100% - 78px)!important;padding:8px!important}html.ui-mobile .nav{width:78px!important;padding-left:5px!important;padding-right:5px!important}.ui-mobile .nav-item{min-height:46px!important;padding:8px 3px!important}.ui-mobile .nav-item small{font-size:7.5px!important}.ui-mobile .appbar .brand-logo{width:42px!important;height:42px!important}.ui-mobile .appbar .brand b{font-size:15px!important}.ui-mobile .account-panel{top:72px!important;right:6px!important;max-width:calc(100vw - 84px)!important}.ui-mobile .user-email{max-width:82px!important;font-size:7.5px!important}.ui-mobile .account-btn{font-size:7.5px!important;padding:0 6px!important}}';
     document.head.appendChild(style);
   }
 
   function updateVersion(){
-    var version = 'V3.0.5';
-    document.title = document.title.replace(/V3\.0\.[1-4]/g, version);
+    var version = 'V3.0.6';
+    document.title = document.title.replace(/V3\.0\.[1-5]/g, version);
     var nodes = document.querySelectorAll('.version, footer');
     for (var i=0;i<nodes.length;i++) {
-      nodes[i].textContent = nodes[i].textContent.replace(/V3\.0\.[1-4]/g, version);
+      nodes[i].textContent = nodes[i].textContent.replace(/V3\.0\.[1-5]/g, version);
     }
   }
 
@@ -82,13 +82,14 @@ html.ui-mobile .account-btn{min-height:30px;padding:0 7px;font-size:8px}\
     root.classList.remove('ui-desktop', 'ui-mobile');
     root.classList.add(mode === 'mobile' ? 'ui-mobile' : 'ui-desktop');
     root.dataset.uiMode = mode;
-    root.dataset.uiDetector = 'v3.0.5';
+    root.dataset.uiDetector = 'v3.0.6';
     installPresentationCSS();
     updateVersion();
   }
 
+  // Important: run again after all linked CSS has loaded so detector presentation rules win.
   applyMode();
-  document.addEventListener('DOMContentLoaded', updateVersion, {once:true});
+  document.addEventListener('DOMContentLoaded', applyMode, {once:true});
   window.addEventListener('resize', applyMode, {passive:true});
   window.addEventListener('orientationchange', applyMode, {passive:true});
   if (window.matchMedia) {
@@ -97,7 +98,7 @@ html.ui-mobile .account-btn{min-height:30px;padding:0 7px;font-size:8px}\
   }
 
   window.wdompetUIDetector = {
-    version: '3.0.5',
+    version: '3.0.6',
     getMode: detectMode,
     apply: applyMode
   };
