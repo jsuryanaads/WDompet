@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0b2343">
-  <meta name="description" content="WDompet V1 - aplikasi pencatatan keuangan pribadi berbasis browser.">
-  <title>WDompet V1</title>
+  <meta name="description" content="WDompet V1.0.1 - aplikasi pencatatan keuangan pribadi berbasis browser.">
+  <title>WDompet V1.0.1</title>
   <link rel="stylesheet" href="style.css?v=1.0.1">
 </head>
 <body>
@@ -21,7 +21,7 @@
     <p class="sidebar-quote">“Disiplin hari ini,<br>masa depan lebih baik”</p>
 
     <div class="appbar-actions">
-      <span class="version">V1</span>
+      <span class="version">V1.0.1</span>
       <button id="exportBtn" class="iconbtn" type="button" aria-label="Export transaksi ke CSV" title="Export CSV">⇩</button>
     </div>
   </header>
@@ -50,16 +50,11 @@
         <div class="panel-head"><div><h2 id="formTitle">Tambah Transaksi</h2><p id="formHelp">Catat pemasukan atau pengeluaran.</p></div></div>
         <form id="transactionForm" novalidate>
           <input type="hidden" id="editId" name="editId">
-          <label for="type">Jenis</label>
-          <select id="type" name="type" required><option value="income">Pemasukan</option><option value="expense">Pengeluaran</option></select>
-          <label for="date">Tanggal</label>
-          <input type="date" id="date" name="date" required>
-          <label for="category">Kategori</label>
-          <select id="category" name="category" required><option value="Makanan">Makanan</option><option value="Transportasi">Transportasi</option><option value="Belanja">Belanja</option><option value="Tagihan">Tagihan</option><option value="Gaji">Gaji</option><option value="Usaha">Usaha</option><option value="Lainnya">Lainnya</option></select>
-          <label for="note">Keterangan</label>
-          <input type="text" id="note" name="note" placeholder="Contoh: Belanja bulanan" maxlength="80" autocomplete="off">
-          <label for="amount">Nominal</label>
-          <input type="number" id="amount" name="amount" min="1" step="1" inputmode="numeric" placeholder="50000" required>
+          <div class="field"><label for="type">Jenis</label><select id="type" name="type" required><option value="income">Pemasukan</option><option value="expense">Pengeluaran</option></select></div>
+          <div class="field"><label for="date">Tanggal</label><input type="date" id="date" name="date" required></div>
+          <div class="field"><label for="category">Kategori</label><select id="category" name="category" required><option value="Makanan">Makanan</option><option value="Transportasi">Transportasi</option><option value="Belanja">Belanja</option><option value="Tagihan">Tagihan</option><option value="Gaji">Gaji</option><option value="Usaha">Usaha</option><option value="Lainnya">Lainnya</option></select></div>
+          <div class="field"><label for="note">Keterangan</label><input type="text" id="note" name="note" placeholder="Contoh: Belanja bulanan" maxlength="80" autocomplete="off"></div>
+          <div class="field"><label for="amount">Nominal</label><input type="number" id="amount" name="amount" min="1" step="1" inputmode="numeric" placeholder="50000" required></div>
           <div class="form-actions"><button id="saveBtn" class="btn primary" type="submit">+ Simpan Transaksi</button><button id="cancelEdit" class="btn secondary" type="button" style="display:none">Batal Edit</button></div>
         </form>
       </div>
@@ -76,7 +71,7 @@
     </section>
   </main>
 
-  <footer>WDompet V1 • Frontend only</footer>
+  <footer>WDompet V1.0.1 • Frontend only</footer>
   <script src="app.js?v=1.0.1"></script>
 </body>
 </html>
