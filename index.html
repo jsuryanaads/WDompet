@@ -4,55 +4,150 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0b2343">
-  <title>KeuanganKu V1</title>
+  <meta name="description" content="WDompet V1 - aplikasi pencatatan keuangan pribadi berbasis browser.">
+  <title>WDompet V1</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="appbar">
-    <div class="brand"><div class="brandmark">W</div><div><b>KeuanganKu</b><span>Kelola Keuangan<br>Lebih Mudah</span></div></div>
-    <div class="sidebar-quote">“Disiplin hari ini,<br>masa depan lebih baik”</div>
-    <div class="appbar-actions"><span class="version">V1</span><button id="exportBtn" class="iconbtn" aria-label="Export CSV" title="Export CSV">⇩</button></div>
+  <header class="appbar" aria-label="Identitas aplikasi">
+    <div class="brand">
+      <div class="brandmark" aria-hidden="true">W</div>
+      <div>
+        <b>WDompet</b>
+        <span>Kelola Keuangan<br>Lebih Mudah</span>
+      </div>
+    </div>
+
+    <p class="sidebar-quote">“Disiplin hari ini,<br>masa depan lebih baik”</p>
+
+    <div class="appbar-actions">
+      <span class="version">V1</span>
+      <button id="exportBtn" class="iconbtn" type="button" aria-label="Export transaksi ke CSV" title="Export CSV">⇩</button>
+    </div>
   </header>
 
   <nav class="nav" aria-label="Navigasi utama">
-    <a class="nav-item active" href="#home">Beranda</a>
+    <a class="nav-item active" href="#home" aria-current="page">Beranda</a>
     <a class="nav-item" href="#transactionForm">Tambah</a>
     <a class="nav-item" href="#history">Transaksi</a>
   </nav>
 
   <main class="container" id="home">
-    <section class="welcome"><span class="eyebrow">PERSONAL FINANCE</span><h1>Keuangan Anda</h1><p>Pantau uang masuk, keluar, dan saldo dengan mudah.</p></section>
-
-    <section class="cards">
-      <article class="card balance"><span>Saldo</span><strong id="balance">Rp0</strong><small>Saldo berjalan</small></article>
-      <article class="card income"><span>Total Pemasukan</span><strong id="income">Rp0</strong><small>Semua pemasukan</small></article>
-      <article class="card expense"><span>Total Pengeluaran</span><strong id="expense">Rp0</strong><small>Semua pengeluaran</small></article>
+    <section class="welcome" aria-labelledby="pageTitle">
+      <span class="eyebrow">PERSONAL FINANCE</span>
+      <h1 id="pageTitle">Keuangan Anda</h1>
+      <p>Pantau uang masuk, keluar, dan saldo dengan mudah.</p>
     </section>
 
-    <section class="grid">
+    <section class="cards" aria-label="Ringkasan saldo">
+      <article class="card balance">
+        <span>Saldo</span>
+        <strong id="balance">Rp0</strong>
+        <small>Saldo berjalan</small>
+      </article>
+      <article class="card income">
+        <span>Total Pemasukan</span>
+        <strong id="income">Rp0</strong>
+        <small>Semua pemasukan</small>
+      </article>
+      <article class="card expense">
+        <span>Total Pengeluaran</span>
+        <strong id="expense">Rp0</strong>
+        <small>Semua pengeluaran</small>
+      </article>
+    </section>
+
+    <section class="grid" aria-label="Pencatatan dan ringkasan transaksi">
       <div class="panel">
-        <div class="panel-head"><div><h2 id="formTitle">Tambah Transaksi</h2><p id="formHelp">Catat pemasukan atau pengeluaran.</p></div></div>
-        <form id="transactionForm">
-          <input type="hidden" id="editId">
-          <label>Jenis<select id="type" required><option value="income">Pemasukan</option><option value="expense">Pengeluaran</option></select></label>
-          <label>Tanggal<input type="date" id="date" required></label>
-          <label>Kategori<select id="category" required><option>Makanan</option><option>Transportasi</option><option>Belanja</option><option>Tagihan</option><option>Gaji</option><option>Usaha</option><option>Lainnya</option></select></label>
-          <label>Keterangan<input type="text" id="note" placeholder="Contoh: Belanja bulanan" maxlength="80"></label>
-          <label>Nominal<input type="number" id="amount" min="1" step="1" placeholder="50000" required></label>
-          <div class="form-actions"><button id="saveBtn" class="btn primary" type="submit">+ Simpan Transaksi</button><button id="cancelEdit" class="btn secondary" type="button" style="display:none">Batal Edit</button></div>
+        <div class="panel-head">
+          <div>
+            <h2 id="formTitle">Tambah Transaksi</h2>
+            <p id="formHelp">Catat pemasukan atau pengeluaran.</p>
+          </div>
+        </div>
+
+        <form id="transactionForm" novalidate>
+          <input type="hidden" id="editId" name="editId">
+
+          <label for="type">Jenis</label>
+          <select id="type" name="type" required>
+            <option value="income">Pemasukan</option>
+            <option value="expense">Pengeluaran</option>
+          </select>
+
+          <label for="date">Tanggal</label>
+          <input type="date" id="date" name="date" required>
+
+          <label for="category">Kategori</label>
+          <select id="category" name="category" required>
+            <option value="Makanan">Makanan</option>
+            <option value="Transportasi">Transportasi</option>
+            <option value="Belanja">Belanja</option>
+            <option value="Tagihan">Tagihan</option>
+            <option value="Gaji">Gaji</option>
+            <option value="Usaha">Usaha</option>
+            <option value="Lainnya">Lainnya</option>
+          </select>
+
+          <label for="note">Keterangan</label>
+          <input type="text" id="note" name="note" placeholder="Contoh: Belanja bulanan" maxlength="80" autocomplete="off">
+
+          <label for="amount">Nominal</label>
+          <input type="number" id="amount" name="amount" min="1" step="1" inputmode="numeric" placeholder="50000" required>
+
+          <div class="form-actions">
+            <button id="saveBtn" class="btn primary" type="submit">+ Simpan Transaksi</button>
+            <button id="cancelEdit" class="btn secondary" type="button" style="display:none">Batal Edit</button>
+          </div>
         </form>
       </div>
 
-      <div class="panel"><div class="panel-head"><div><h2>Ringkasan</h2><p>Ikhtisar transaksi yang tersimpan.</p></div></div><div class="summary"><div><span>Jumlah transaksi</span><strong id="count">0</strong></div><div><span>Transaksi pemasukan</span><strong id="incomeCount">0</strong></div><div><span>Transaksi pengeluaran</span><strong id="expenseCount">0</strong></div></div></div>
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Ringkasan</h2>
+            <p>Ikhtisar transaksi yang tersimpan.</p>
+          </div>
+        </div>
+        <div class="summary">
+          <div><span>Jumlah transaksi</span><strong id="count">0</strong></div>
+          <div><span>Transaksi pemasukan</span><strong id="incomeCount">0</strong></div>
+          <div><span>Transaksi pengeluaran</span><strong id="expenseCount">0</strong></div>
+        </div>
+      </div>
     </section>
 
-    <section class="panel" id="history">
-      <div class="panel-head transactions-head"><div><h2>Riwayat Transaksi</h2><p>Data tersimpan otomatis di browser perangkat ini.</p></div><input id="search" class="search" type="search" placeholder="Cari transaksi..."></div>
-      <div class="table-wrap"><table><thead><tr><th>Tanggal</th><th>Jenis</th><th>Kategori</th><th>Keterangan</th><th>Nominal</th><th>Aksi</th></tr></thead><tbody id="transactionList"></tbody></table><div id="empty" class="empty">Belum ada transaksi.</div></div>
+    <section class="panel" id="history" aria-labelledby="historyTitle">
+      <div class="panel-head transactions-head">
+        <div>
+          <h2 id="historyTitle">Riwayat Transaksi</h2>
+          <p>Data tersimpan otomatis di browser perangkat ini.</p>
+        </div>
+        <label for="search" class="sr-only">Cari transaksi</label>
+        <input id="search" class="search" type="search" placeholder="Cari transaksi..." autocomplete="off">
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <caption class="sr-only">Daftar riwayat transaksi keuangan</caption>
+          <thead>
+            <tr>
+              <th scope="col">Tanggal</th>
+              <th scope="col">Jenis</th>
+              <th scope="col">Kategori</th>
+              <th scope="col">Keterangan</th>
+              <th scope="col">Nominal</th>
+              <th scope="col">Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="transactionList"></tbody>
+        </table>
+        <div id="empty" class="empty">Belum ada transaksi.</div>
+      </div>
     </section>
   </main>
 
-  <footer>KeuanganKu V1 • Frontend only</footer>
+  <footer>WDompet V1 • Frontend only</footer>
   <script src="app.js"></script>
 </body>
 </html>
