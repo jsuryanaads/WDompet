@@ -1,12 +1,8 @@
 <!doctype html>
 <html lang="id">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0b2343">
-<title>WDompet V2.3 — Transaksi</title>
-<meta http-equiv="refresh" content="0;url=index.html#transactions">
-<script>location.replace('index.html#transactions');</script>
-</head>
-<body><p>Membuka halaman Transaksi WDompet V2.3…</p></body>
-</html>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b2343"><title>WDompet V2.4.1 — Transaksi</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<header class="appbar"><div class="brand"><div class="brandmark" aria-label="WDompet logo">W</div><div><b>WDompet</b><span>Kelola Keuangan<br>Lebih Mudah</span></div></div><div class="appbar-actions"><span class="version">V2.4.1</span><button id="themeToggle" class="top-icon" type="button" aria-label="Ganti tema">☼</button><button id="exportBtn" class="iconbtn" type="button" aria-label="Export CSV">⇩</button></div></header>
+<nav class="nav" aria-label="Navigasi utama"><a class="nav-item" href="index.html"><span class="nav-icon">⌂</span><small>Beranda</small></a><a class="nav-item active" href="transaksi.html"><span class="nav-icon">☷</span><small>Transaksi</small></a><a class="nav-item add-nav" href="tambah.html"><span class="nav-icon">＋</span><small>Tambah</small></a><a class="nav-item" href="anggaran.html"><span class="nav-icon">◫</span><small>Anggaran</small></a><a class="nav-item" href="laporan.html"><span class="nav-icon">▥</span><small>Laporan</small></a><a class="nav-item" href="sumber-dana.html"><span class="nav-icon">◉</span><small>Sumber Dana</small></a></nav>
+<main class="container" style="max-width:1160px;margin:22px auto 90px;padding:0 18px"><section class="page-title"><span class="eyebrow">TRANSAKSI</span><h1>Riwayat Transaksi</h1><p>Semua transaksi tersimpan di perangkat dan tersinkron antar halaman.</p></section>
+<section class="panel"><div class="tools"><input id="search" placeholder="Cari transaksi…" autocomplete="off"><select id="typeFilter"><option value="all">Semua jenis</option><option value="income">Pemasukan</option><option value="expense">Pengeluaran</option></select><select id="monthFilter" aria-label="Periode"></select></div><div class="table-wrap" style="overflow:auto"><table><caption class="sr-only">Daftar transaksi</caption><thead><tr><th>Tanggal</th><th>Jenis</th><th>Kategori</th><th>Keterangan</th><th>Nominal</th><th>Sumber Dana</th><th>Aksi</th></tr></thead><tbody id="list"></tbody></table></div><div id="empty" class="empty">Belum ada transaksi.</div></section></main><script src="app.js"></script></body></html>
