@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  // WDompet V3.0.2 — detector + two presentation modes.
+  // WDompet V3.0.3 — detector + two presentation modes.
   function detectMode(){
     var width = Number(window.innerWidth) || 0;
     var hasFinePointer = false;
@@ -28,9 +28,9 @@
   }
 
   function installPresentationCSS(){
-    if (document.getElementById('wdompet-presentation-v302')) return;
+    if (document.getElementById('wdompet-presentation-v303')) return;
     var style = document.createElement('style');
-    style.id = 'wdompet-presentation-v302';
+    style.id = 'wdompet-presentation-v303';
     style.textContent = '\
 html.ui-desktop body{padding-left:220px;padding-bottom:0}\
 html.ui-desktop .appbar{position:fixed;left:0;top:0;width:220px;height:100vh;padding:28px 18px;display:flex;flex-direction:column;align-items:stretch;gap:24px}\
@@ -68,11 +68,11 @@ html.ui-mobile .account-btn{min-height:30px;padding:0 7px;font-size:8px}\
   }
 
   function updateVersion(){
-    var version = 'V3.0.2';
-    document.title = document.title.replace(/V3\.0\.1/g, version);
+    var version = 'V3.0.3';
+    document.title = document.title.replace(/V3\.0\.[12]/g, version);
     var nodes = document.querySelectorAll('.version, footer');
     for (var i=0;i<nodes.length;i++) {
-      nodes[i].textContent = nodes[i].textContent.replace(/V3\.0\.1/g, version);
+      nodes[i].textContent = nodes[i].textContent.replace(/V3\.0\.[12]/g, version);
     }
   }
 
@@ -82,12 +82,13 @@ html.ui-mobile .account-btn{min-height:30px;padding:0 7px;font-size:8px}\
     root.classList.remove('ui-desktop', 'ui-mobile');
     root.classList.add(mode === 'mobile' ? 'ui-mobile' : 'ui-desktop');
     root.dataset.uiMode = mode;
-    root.dataset.uiDetector = 'v3.0.2';
+    root.dataset.uiDetector = 'v3.0.3';
     installPresentationCSS();
     updateVersion();
   }
 
   applyMode();
+  document.addEventListener('DOMContentLoaded', updateVersion, {once:true});
   window.addEventListener('resize', applyMode, {passive:true});
   window.addEventListener('orientationchange', applyMode, {passive:true});
   if (window.matchMedia) {
@@ -96,7 +97,7 @@ html.ui-mobile .account-btn{min-height:30px;padding:0 7px;font-size:8px}\
   }
 
   window.wdompetUIDetector = {
-    version: '3.0.2',
+    version: '3.0.3',
     getMode: detectMode,
     apply: applyMode
   };
