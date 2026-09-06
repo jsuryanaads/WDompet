@@ -1,0 +1,36 @@
+name: Fix WDompet transaction mobile UI
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  refine-transactions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Improve transaction responsive layout
+        shell: python
+        run: |
+          from pathlib import Path
+          p = Path('v2/index.html')
+          s = p.read_text(encoding='utf-8')
+          css = '''\n<style id="v22-transactions-mobile">\n@media(max-width:850px){\n  .transaction-panel{overflow:hidden!important}\n  .transaction-panel .sectionhead.row{display:grid!important;grid-template-columns:1fr!important;gap:10px!important;align-items:start!important}\n  .transaction-panel .sectionhead.row>div:first-child{min-width:0!important}\n  .transaction-panel .sectionhead.row h2{font-size:16px!important;line-height:1.15!important;margin:0!important}\n  .transaction-panel .sectionhead.row p{margin:3px 0 0!important;font-size:9px!important}\n  .transaction-panel .tools{display:grid!important;grid-template-columns:minmax(0,1fr) 105px!important;gap:7px!important;width:100%!important}\n  .transaction-panel .tools input,.transaction-panel .tools select{width:100%!important;min-width:0!important;height:34px!important;font-size:9px!important}\n  .transaction-panel .tablewrap{width:100%!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch!important;border-radius:10px!important}\n  .transaction-panel table{min-width:620px!important;width:100%!important;table-layout:auto!important}\n  .transaction-panel th,.transaction-panel td{white-space:nowrap!important}\n  .transaction-panel th:nth-child(1){min-width:78px!important}\n  .transaction-panel th:nth-child(2){min-width:95px!important}\n  .transaction-panel th:nth-child(3){min-width:105px!important}\n  .transaction-panel th:nth-child(4){min-width:160px!important}\n  .transaction-panel th:nth-child(5){min-width:120px!important}\n  .transaction-panel th:nth-child(6){min-width:65px!important}\n  .transaction-panel .empty{padding:28px 12px!important;font-size:9px!important}\n}\n@media(max-width:520px){\n  .transaction-panel{padding:14px!important;border-radius:18px!important}\n  .transaction-panel .tools{grid-template-columns:minmax(0,1fr) 92px!important}\n  .transaction-panel .tools input,.transaction-panel .tools select{height:32px!important;font-size:8.5px!important}\n  .transaction-panel table{min-width:600px!important}\n  .transaction-panel th,.transaction-panel td{font-size:8px!important}\n}\n</style>\n'''
+          if 'id="v22-transactions-mobile"' not in s:
+              s = s.replace('</head>', css + '</head>', 1)
+              p.write_text(s, encoding='utf-8')
+      - name: Commit UI fix
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add v2/index.html
+          git diff --cached --quiet && exit 0
+          git commit -m "Fix transaction mobile responsive layout"
+          git push
+      - name: Remove temporary workflow
+        shell: bash
+        run: |
+          git rm .github/workflows/fix-transactions-mobile.yml
+          git commit -m "Remove temporary transaction UI workflow"
+          git push
