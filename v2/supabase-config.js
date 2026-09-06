@@ -1,0 +1,1 @@
+window.WDOMPET_SUPABASE={url:'https://ipclsfyabjgfeqpiqtlo.supabase.co',key:'PASTE_SUPABASE_PUBLISHABLE_KEY_HERE'};
