@@ -1,0 +1,95 @@
+CREATE DATABASE IF NOT EXISTS wdompet CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE wdompet;
+
+CREATE TABLE IF NOT EXISTS users (
+  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(120) NOT NULL,
+  email VARCHAR(190) NOT NULL UNIQUE,
+  password_hash VARCHAR(255) NOT NULL,
+  role ENUM('admin','user') NOT NULL DEFAULT 'user',
+  active TINYINT(1) NOT NULL DEFAULT 1,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS api_sessions (
+  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id BIGINT UNSIGNED NOT NULL,
+  token_hash CHAR(64) NOT NULL UNIQUE,
+  expires_at DATETIME NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_session_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  INDEX idx_session_expiry (expires_at)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS kategori (
+  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL UNIQUE,
+  type ENUM('income','expense','both') NOT NULL DEFAULT 'expense',
+  active TINYINT(1) NOT NULL DEFAULT 1,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS sumber_dana (
+  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id BIGINT UNSIGNED NOT NULL,
+  name VARCHAR(120) NOT NULL,
+  type ENUM('bank','ewallet','cash','other') NOT NULL DEFAULT 'other',
+  opening_balance DECIMAL(18,2) NOT NULL DEFAULT 0,
+  masked VARCHAR(120) NULL,
+  active TINYINT(1) NOT NULL DEFAULT 1,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  CONSTRAINT fk_fund_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  INDEX idx_fund_user (user_id)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS transaksi (
+  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id BIGINT UNSIGNED NOT NULL,
+  fund_id BIGINT UNSIGNED NULL,
+  category_id BIGINT UNSIGNED NULL,
+  type ENUM('income','expense') NOT NULL,
+  amount DECIMAL(18,2) NOT NULL,
+  transaction_date DATE NOT NULL,
+  note VARCHAR(500) NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  CONSTRAINT fk_tx_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  CONSTRAINT fk_tx_fund FOREIGN KEY (fund_id) REFERENCES sumber_dana(id) ON DELETE SET NULL,
+  CONSTRAINT fk_tx_category FOREIGN KEY (category_id) REFERENCES kategori(id) ON DELETE SET NULL,
+  INDEX idx_tx_user_date (user_id, transaction_date),
+  INDEX idx_tx_fund (fund_id),
+  INDEX idx_tx_category (category_id)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS transfer (
+  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id BIGINT UNSIGNED NOT NULL,
+  from_fund_id BIGINT UNSIGNED NOT NULL,
+  to_fund_id BIGINT UNSIGNED NOT NULL,
+  amount DECIMAL(18,2) NOT NULL,
+  transfer_date DATE NOT NULL,
+  note VARCHAR(500) NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_transfer_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  CONSTRAINT fk_transfer_from FOREIGN KEY (from_fund_id) REFERENCES sumber_dana(id) ON DELETE RESTRICT,
+  CONSTRAINT fk_transfer_to FOREIGN KEY (to_fund_id) REFERENCES sumber_dana(id) ON DELETE RESTRICT,
+  INDEX idx_transfer_user_date (user_id, transfer_date)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS anggaran (
+  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id BIGINT UNSIGNED NOT NULL,
+  period CHAR(7) NOT NULL,
+  amount DECIMAL(18,2) NOT NULL DEFAULT 0,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  CONSTRAINT fk_budget_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  UNIQUE KEY uq_budget_user_period (user_id, period)
+) ENGINE=InnoDB;
+
+INSERT IGNORE INTO kategori (name, type) VALUES
+('Gaji','income'),('Bonus','income'),('Penjualan','income'),
+('Makanan','expense'),('Transportasi','expense'),('Belanja','expense'),
+('Tagihan','expense'),('Kesehatan','expense'),('Hiburan','expense'),('Lainnya','both');
