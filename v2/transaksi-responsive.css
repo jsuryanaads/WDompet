@@ -1,0 +1,49 @@
+/* WDompet V3.0.0 - responsive transaction list */
+@media(max-width:560px){
+  #list tr{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0 10px;
+    margin:0 0 12px;
+    padding:12px;
+    border:1px solid #e3ebf4;
+    border-radius:14px;
+    background:#fff;
+    box-shadow:0 5px 16px rgba(22,55,92,.05);
+  }
+  #list td{
+    display:block;
+    min-width:0;
+    padding:6px 0;
+    border:0;
+    font-size:10px;
+    overflow-wrap:anywhere;
+  }
+  #list td::before{
+    display:block;
+    margin-bottom:3px;
+    color:#8995a8;
+    font-size:7px;
+    font-weight:900;
+    letter-spacing:.6px;
+    text-transform:uppercase;
+  }
+  #list td:nth-child(1)::before{content:'Tanggal'}
+  #list td:nth-child(2)::before{content:'Jenis'}
+  #list td:nth-child(3)::before{content:'Kategori'}
+  #list td:nth-child(4)::before{content:'Keterangan'}
+  #list td:nth-child(5)::before{content:'Nominal'}
+  #list td:nth-child(6)::before{content:'Sumber Dana'}
+  #list td:nth-child(7)::before{content:'Aksi'}
+  #list td:nth-child(3),#list td:nth-child(4),#list td:nth-child(6),#list td:nth-child(7){grid-column:1/-1}
+  #list td:nth-child(5){font-weight:800}
+  #list td:nth-child(7){padding-top:8px;border-top:1px solid #edf1f6;margin-top:3px}
+  #list .edit,#list .del{padding:7px 10px;font-size:9px}
+  .tablewrap{overflow:visible}
+  .tablewrap table{min-width:0;width:100%}
+  .tablewrap thead{display:none}
+  body.theme-dark #list tr{background:#101f33;border-color:#293b53}
+  body.theme-dark #list td{color:#e7eef7}
+  body.theme-dark #list td::before{color:#8fa1b6}
+  body.theme-dark #list td:nth-child(7){border-color:#29394e}
+}
