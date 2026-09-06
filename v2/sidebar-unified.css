@@ -1,10 +1,13 @@
-/* WDompet V3.0.0 - unified sidebar and account controls */
+/* WDompet V3.0.7 - unified sidebar and account controls */
 .nav-item.add-nav{width:100%!important;height:auto!important;min-height:46px!important;margin:0!important;padding:13px 14px!important;border:0!important;border-radius:13px!important;background:none!important;box-shadow:none!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;color:#a9bad3!important;font-size:13px!important;font-weight:800!important;text-decoration:none!important}
 .nav-item.add-nav small{display:block!important;font-size:13px!important;font-weight:800!important;line-height:1.2!important;white-space:nowrap!important;color:inherit!important}
 .nav-item.add-nav:hover{background:rgba(63,145,234,.12)!important;color:#fff!important}
 .nav-item.add-nav.active{background:linear-gradient(90deg,rgba(41,125,224,.45),rgba(41,125,224,.16))!important;color:#fff!important;box-shadow:inset 3px 0 0 #46b8ff!important}
 .user-email{display:inline-flex;align-items:center;max-width:230px;min-height:32px;padding:0 10px;border-radius:9px;background:rgba(41,125,224,.12);font-size:11px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#eaf4ff}
-.account-panel{position:fixed;top:16px;right:22px;z-index:1000;display:flex;align-items:center;gap:8px;padding:7px 8px;border:1px solid rgba(111,182,241,.28);border-radius:12px;background:rgba(7,29,59,.92);box-shadow:0 10px 28px rgba(0,0,0,.18);backdrop-filter:blur(10px)}
+.sidebar-user-email{display:flex!important;width:fit-content;max-width:100%!important;margin-top:5px!important;min-height:25px!important;padding:0 8px!important;font-size:9px!important;line-height:1!important}
+.account-panel{display:none!important}
+.account-actions{width:100%!important;display:flex!important;flex-direction:column!important;gap:6px!important;margin:6px 0 2px!important;padding:0!important}
+.account-actions .account-btn{width:100%!important}
 .account-btn{min-height:32px;padding:0 10px;border:1px solid rgba(111,182,241,.28);border-radius:8px;background:rgba(255,255,255,.06);color:#fff;font:inherit;font-size:10px;font-weight:800;cursor:pointer;white-space:nowrap}
 .account-btn:hover{background:rgba(255,255,255,.14)}
 .account-btn:disabled{opacity:.55;cursor:wait}
@@ -15,18 +18,18 @@
   .nav-item.add-nav small{display:block!important;font-size:8px!important;line-height:1.2!important;white-space:normal!important;word-break:break-word!important;text-align:center!important}
   .nav-item.add-nav:hover{background:rgba(255,255,255,.08)!important;color:#fff!important}
   .nav-item.add-nav.active{background:rgba(255,255,255,.08)!important;color:#fff!important;box-shadow:none!important}
-  .user-email{max-width:100px;min-width:0;font-size:8px;padding:0 7px}
-  .account-panel{top:74px;right:8px;left:auto;gap:5px;padding:5px 6px;border-radius:10px;max-width:calc(100vw - 96px)}
-  .account-btn{min-height:30px;padding:0 7px;font-size:8px}
-  main{padding-top:58px!important}
+  .sidebar-user-email{max-width:100%!important;width:100%!important;min-height:22px!important;margin-top:4px!important;padding:0 5px!important;border-radius:7px!important;font-size:7px!important;justify-content:center!important}
+  .account-panel{display:none!important}
+  .account-actions{gap:4px!important;margin:5px 0 2px!important}
+  .account-actions .account-btn{min-height:34px!important;padding:0 3px!important;font-size:7.5px!important;border-radius:8px!important;white-space:normal!important;line-height:1.1!important}
+  main{padding-top:12px!important}
+  .brand .sidebar-user-email{overflow:hidden;text-overflow:ellipsis}
 }
 @media(min-width:561px) and (max-width:850px){
-  .user-email{max-width:150px;font-size:9px}
-  .account-btn{font-size:9px}
-  .account-panel{max-width:calc(100vw - 110px)}
+  .sidebar-user-email{font-size:8px!important}
+  .account-actions .account-btn{font-size:8px!important}
 }
 @media(max-width:560px){
-  .user-email{max-width:82px;font-size:7.5px}
-  .account-panel{top:72px;right:6px;max-width:calc(100vw - 92px)}
-  .account-btn{font-size:7.5px;padding:0 6px}
+  .sidebar-user-email{font-size:6.5px!important}
+  .account-actions .account-btn{font-size:7px!important}
 }
